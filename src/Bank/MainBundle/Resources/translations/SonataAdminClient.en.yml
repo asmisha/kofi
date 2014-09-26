@@ -1,0 +1,41 @@
+breadcrumb.link_client_list: Clients
+
+form.label_first_name: First Name
+form.label_middle_name: Middle Name
+form.label_last_name: Last Name
+form.label_passport_series: Passport Series
+form.label_passport_number: Passport Number
+form.label_passport_issue_date: Passport Issue Date
+form.label_passport_issue_authority: Passport Issue Authority
+form.label_accounts: Accounts
+form.label_plain_password: Password
+
+list.label_id: ID
+list.label_first_name: First Name
+list.label_middle_name: Middle Name
+list.label_last_name: Last Name
+list.label_passport_series: Passport Series
+list.label_passport_number: Passport Number
+list.label_passport_issue_date: Passport Issue Date
+list.label_passport_issue_authority: Passport Issue Authority
+list.label_created_at: Created At
+list.label__action: Actions
+
+filter.label_id: ID
+filter.label_first_name: First Name
+filter.label_middle_name: Middle Name
+filter.label_last_name: Last Name
+filter.label_passport_series: Passport Series
+filter.label_passport_number: Passport Number
+filter.label_passport_issue_date: Passport Issue Date
+filter.label_passport_issue_authority: Passport Issue Authority
+filter.label_created_at: Created At
+filter.label__action: Actions
+
+show.label_first_name: First Name
+show.label_middle_name: Middle Name
+show.label_last_name: Last Name
+show.label_passport_series: Passport Series
+show.label_passport_number: Passport Number
+show.label_passport_issue_date: Passport Issue Date
+show.label_passport_issue_authority: Passport Issue Authority

@@ -1,0 +1,19 @@
+{% extends 'SonataAdminBundle::standard_layout.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+
+	<script type="text/javascript">
+		function generatePassword(){
+			var password = Math.random().toString(36).substr(2, 7);
+
+			// TODO open page with password
+
+			return password;
+		}
+	</script>
+{% endblock %}

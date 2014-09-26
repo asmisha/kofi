@@ -1,0 +1,52 @@
+Bank\MainBundle\Entity\Client:
+    type: entity
+    table: null
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        firstName:
+            type: string
+            length: 255
+        middleName:
+            type: string
+            length: 255
+        lastName:
+            type: string
+            length: 255
+        passportSeries:
+            type: string
+            length: 255
+        passportNumber:
+            type: string
+            length: 255
+        passportIssueDate:
+            type: datetime
+        passportIssueAuthority:
+            type: string
+            length: 255
+        createdAt:
+            type: datetime
+        salt:
+            type: string
+            length: 255
+            nullable: true
+        password:
+            type: string
+            length: 255
+            nullable: true
+        plainPassword:
+            type: string
+            length: 255
+            nullable: true
+
+    oneToMany:
+        accounts:
+            targetEntity: Account
+            mappedBy: client
+            cascade: [persist]
+
+    lifecycleCallbacks: {  }

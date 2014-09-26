@@ -1,0 +1,31 @@
+parameters:
+    bank_group: "Client"
+
+services:
+    sonata.admin.client:
+        class: Bank\MainBundle\Admin\ClientAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "%bank_group%", label: "Client", label_translator_strategy: "sonata.admin.label.strategy.underscore" }
+        arguments:
+            - ~
+            - Bank\MainBundle\Entity\Client
+            - BankMainBundle:CRUD
+        calls:
+            - [ setTranslationDomain, [SonataAdminClient]]
+
+    sonata.admin.account:
+        class: Bank\MainBundle\Admin\AccountAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "%bank_group%", label: "Account", label_translator_strategy: "sonata.admin.label.strategy.underscore" }
+        arguments:
+            - ~
+            - Bank\MainBundle\Entity\Account
+            - ~
+        calls:
+            - [ setTranslationDomain, [SonataAdminAccount]]
+
+    subscriber.client:
+        class: Bank\MainBundle\Services\ClientSubscriber
+        arguments: [@service_container]
+        tags:
+            - { name: doctrine.event_subscriber, connection: default }

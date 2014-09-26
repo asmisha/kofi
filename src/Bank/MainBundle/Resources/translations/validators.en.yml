@@ -1,0 +1,3 @@
+client.passportSeries.regex: Your passport series should consist of exactly 2 letters of latin alphabet
+client.passportNumber.regex: Your passport number should consist of exactly 7 digits
+client.passportIssueDate.dateRange: Your passport issue date should not be in future

@@ -1,0 +1,38 @@
+Bank\MainBundle\Entity\Client:
+    properties:
+        firstName:
+            - NotBlank: ~
+        middleName:
+            - NotBlank: ~
+        lastName:
+            - NotBlank: ~
+        createdAt:
+            - Date: ~
+        passportSeries:
+            - Regex:
+                pattern: '/^[a-z]{2}$/i'
+                message: "client.passportSeries.regex"
+        passportNumber:
+            - Regex:
+                pattern: '/^[\d]{7}$/i'
+                message: "client.passportNumber.regex"
+        passportIssueDate:
+            - Date: ~
+            - Bank\MainBundle\Validator\Constraints\DateRange:
+                max: "today"
+                maxMessage: "client.passportIssueDate.dateRange"
+        passportIssueAuthority:
+            - NotBlank: ~
+
+Bank\MainBundle\Entity\Account:
+    properties:
+        createdAt:
+            - Date: ~
+        currency:
+            - NotBlank: ~
+        balance:
+            - Range:
+                min: 0
+                minMessage: Balance must be positive
+        client:
+            - NotNull: ~

@@ -1,0 +1,19 @@
+breadcrumb.link_account_list: Accounts
+
+list.label_client: Client
+list.label_currency: Currency
+list.label_balance: Balance
+list.label_createdAt: Created At
+
+show.label_client: Client
+show.label_currency: Currency
+show.label_balance: Balance
+show.label_createdAt: Created At
+
+filter.label_client: Client
+filter.label_currency: Currency
+filter.label_createdAt: Created At
+
+form.label_id: 'Account #'
+form.label_client: Client
+form.label_currency: Currency
