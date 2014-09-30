@@ -43,6 +43,14 @@ Bank\MainBundle\Entity\Client:
             length: 255
             nullable: true
 
+        token:
+            type: string
+            length: 255
+            nullable: true
+        tokenExpirationDate:
+            type: datetime
+            nullable: true
+
     oneToMany:
         accounts:
             targetEntity: Account

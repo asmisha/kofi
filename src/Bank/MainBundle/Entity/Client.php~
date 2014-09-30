@@ -231,6 +231,7 @@ class Client
     {
         $this->accounts = new \Doctrine\Common\Collections\ArrayCollection();
 		$this->createdAt = new \DateTime();
+		$this->salt = base_convert(sha1(uniqid(mt_rand(), true)), 16, 36);
     }
 
     /**
@@ -381,4 +382,8 @@ class Client
     {
         return $this->plainPassword;
     }
+
+	public function eraseCredentials(){
+		$this->plainPassword = '';
+	}
 }

@@ -28,6 +28,7 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+    exception_controller: 'Bank\ApiBundle\Controller\ExceptionController::handleAction'
 
 # Assetic Configuration
 assetic:
@@ -104,3 +105,9 @@ fos_user:
 
     service:
         user_manager: sonata.user.orm.user_manager                      # If you're using doctrine orm (use sonata.user.mongodb.group_manager for mongodb)
+
+fos_rest:
+    routing_loader:
+        default_format: json
+    view:
+        view_response_listener: true

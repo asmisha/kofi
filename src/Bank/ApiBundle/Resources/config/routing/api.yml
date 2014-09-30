@@ -1,0 +1,11 @@
+bank_api_client_list:
+    pattern:  /client/list
+    defaults: { _controller: BankApiBundle:Client:list, _format: ~ }
+    requirements:
+        _method: POST
+
+bank_api_client_auth:
+    pattern:  /client/auth
+    defaults: { _controller: BankApiBundle:Client:auth, _format: ~ }
+    requirements:
+        _method: POST

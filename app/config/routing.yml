@@ -2,6 +2,10 @@ bank_main:
     resource: "@BankMainBundle/Resources/config/routing.yml"
     prefix:   /
 
+bank_api:
+    resource: "@BankApiBundle/Resources/config/routing.yml"
+    prefix:   /
+
 admin:
     resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
     prefix: /admin

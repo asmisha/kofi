@@ -18,12 +18,14 @@
         "sensio/distribution-bundle": "~3.0",
         "sensio/framework-extra-bundle": "~3.0",
         "incenteev/composer-parameter-handler": "~2.0",
-        "sonata-project/admin-bundle": "dev-master",
+        "sonata-project/admin-bundle": "2.3.*",
         "sonata-project/doctrine-orm-admin-bundle": "dev-master",
         "sonata-project/easy-extends-bundle": "dev-master",
         "sonata-project/datagrid-bundle": "~2.2@dev",
         "sonata-project/user-bundle": "dev-master",
-        "doctrine/doctrine-fixtures-bundle": "2.2.*"
+        "doctrine/doctrine-fixtures-bundle": "2.2.*",
+        "friendsofsymfony/rest-bundle": "1.*",
+        "jms/serializer-bundle": "*"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

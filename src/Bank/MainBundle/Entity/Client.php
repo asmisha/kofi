@@ -386,4 +386,60 @@ class Client
 	public function eraseCredentials(){
 		$this->plainPassword = '';
 	}
+    /**
+     * @var string
+     */
+    private $token;
+
+    /**
+     * @var \DateTime
+     */
+    private $tokenExpirationDate;
+
+
+    /**
+     * Set token
+     *
+     * @param string $token
+     * @return Client
+     */
+    public function setToken($token)
+    {
+        $this->token = $token;
+
+        return $this;
+    }
+
+    /**
+     * Get token
+     *
+     * @return string 
+     */
+    public function getToken()
+    {
+        return $this->token;
+    }
+
+    /**
+     * Set tokenExpirationDate
+     *
+     * @param \DateTime $tokenExpirationDate
+     * @return Client
+     */
+    public function setTokenExpirationDate($tokenExpirationDate)
+    {
+        $this->tokenExpirationDate = $tokenExpirationDate;
+
+        return $this;
+    }
+
+    /**
+     * Get tokenExpirationDate
+     *
+     * @return \DateTime 
+     */
+    public function getTokenExpirationDate()
+    {
+        return $this->tokenExpirationDate;
+    }
 }
