@@ -14,8 +14,6 @@ class ClientController extends FOSRestController
 {
 	const AUTH_FAILED_CODE = 1;
 	const AUTH_FAILED_MESSAGE = 'Authentication failed';
-	const TOKEN_EXPIRED_CODE = 2;
-	const TOKEN_EXPIRED_MESSAGE = 'Token Expired';
 
 	public function listAction(Request $request){
 		/** @var QueryBuilder $qb */
@@ -77,17 +75,8 @@ class ClientController extends FOSRestController
 			throw new \Exception(self::AUTH_FAILED_MESSAGE, self::AUTH_FAILED_CODE);
 		}
 
-		$client
-			->setToken(str_shuffle(md5(time()).implode('', array_merge(range('0', '9'), range('a', 'z')))))
-			->setTokenExpirationDate(new \DateTime('+1 hour'))
-		;
-
-		$em->persist($client);
-		$em->flush();
-
 		return $this->view(array(
-			'token' => $client->getToken(),
-			'expirationDate' => $client->getTokenExpirationDate()->format('r'),
+			'success' => true,
 		));
 	}
 
@@ -118,16 +107,11 @@ class ClientController extends FOSRestController
 
 		/** @var Client $client */
 		$client = $em->getRepository('BankMainBundle:Client')->findOneBy(array(
-			'token' => $request->get('token')
+			'id' => $request->get('clientId')
 		));
 
 		if(!$client){
 			throw new \Exception(self::AUTH_FAILED_MESSAGE, self::AUTH_FAILED_CODE);
-		}
-
-		$now = new \DateTime();
-		if($client->getTokenExpirationDate() < $now){
-			throw new \Exception(self::TOKEN_EXPIRED_MESSAGE, self::TOKEN_EXPIRED_CODE);
 		}
 
 		return $client;
