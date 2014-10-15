@@ -74,10 +74,13 @@ class Api {
 	}
 
 	/**
-	 * @param Account $account
+	 * @param Account|integer $account
 	 * @param $amount
+	 * @throws \Exception
 	 */
 	public function writeOff($account, $amount){
+		$account = $this->normalizeAccount($account);
+
 		if($account->getBalance() < $amount){
 			throw new \Exception(self::INSUFFICIENT_FUNDS_MESSAGE, self::INSUFFICIENT_FUNDS_CODE);
 		}
@@ -94,6 +97,33 @@ class Api {
 			$this->em->flush();
 
 			throw new \Exception(self::INSUFFICIENT_FUNDS_MESSAGE, self::INSUFFICIENT_FUNDS_CODE);
+		}
+	}
+
+	/**
+	 * @param Account|integer $account
+	 * @param $amount
+	 */
+	public function charge($account, $amount){
+		$account = $this->normalizeAccount($account);
+
+		$account->setBalance($account->getBalance() + $amount);
+		$this->em->persist($account);
+		$this->em->flush();
+	}
+
+	/**
+	 * @param Account|integer $account
+	 * @return null|Account
+	 * @throws \Exception
+	 */
+	private function normalizeAccount($account){
+		if($account instanceof $account){
+			return $account;
+		}elseif(intval($account)){
+			return $this->em->getRepository('BankMainBundle:Account')->find($account);
+		}else{
+			throw new \Exception(self::ACCOUNT_NOT_FOUND_MESSAGE, self::ACCOUNT_NOT_FOUND_CODE);
 		}
 	}
 } 

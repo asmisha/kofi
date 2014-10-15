@@ -21,3 +21,9 @@ bank_api_erip_pay:
     defaults: { _controller: BankApiBundle:Erip:pay, _format: ~ }
     requirements:
         _method: POST
+
+bank_api_payment_pay:
+    pattern:  /payment/pay
+    defaults: { _controller: BankApiBundle:Payment:pay, _format: ~ }
+    requirements:
+        _method: POST
