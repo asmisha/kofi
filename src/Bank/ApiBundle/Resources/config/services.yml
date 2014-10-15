@@ -1,4 +1,4 @@
 services:
-#    bank_api.example:
-#        class: Bank\ApiBundle\Example
-#        arguments: [@service_id, "plain_value", %parameter%]
+    api:
+        class: Bank\ApiBundle\Services\Api
+        arguments: [@doctrine.orm.entity_manager, @request_stack]

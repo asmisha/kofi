@@ -9,6 +9,8 @@ namespace Bank\MainBundle\DataFixtures\ORM;
 
 
 use Application\Sonata\UserBundle\Entity\User;
+use Bank\MainBundle\Entity\Account;
+use Bank\MainBundle\Entity\Card;
 use Bank\MainBundle\Entity\Client;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -106,6 +108,28 @@ class Init implements FixtureInterface
 				->setPassportNumber(mt_rand(1000000, 9999999))
 				->setPassportSeries($name[0][0].$name[1][0])
 			;
+
+			for($j = mt_rand(0, 2); $j >= 0; $j--){
+				$account = new Account();
+
+				$account
+					->setBalance(mt_rand(0, 1000000))
+					->setClient($client)
+					->setCurrency('BYR')
+				;
+				$om->persist($account);
+
+				for($k = mt_rand(0, 2); $k >= 0; $k--){
+					$card = new Card();
+					$card
+						->setAccount($account)
+						->setCvv(mt_rand(100, 999))
+						->setNumber(substr(str_shuffle(str_repeat(implode('', range(0, 9)), 10)), 0, 16))
+						->setExpiresAt(new \DateTime(sprintf('+%d days', mt_rand(100, 1000))))
+					;
+					$om->persist($card);
+				}
+			}
 
 			$om->persist($client);
 		}

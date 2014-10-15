@@ -1,0 +1,111 @@
+<?php
+
+namespace Bank\MainBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Card
+ */
+class Card
+{
+    /**
+     * @var integer
+     */
+    private $id;
+
+    /**
+     * @var string
+     */
+    private $number;
+
+    /**
+     * @var string
+     */
+    private $cvv;
+
+    /**
+     * @var \DateTime
+     */
+    private $expiresAt;
+
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set number
+     *
+     * @param string $number
+     * @return Card
+     */
+    public function setNumber($number)
+    {
+        $this->number = $number;
+
+        return $this;
+    }
+
+    /**
+     * Get number
+     *
+     * @return string 
+     */
+    public function getNumber()
+    {
+        return $this->number;
+    }
+
+    /**
+     * Set cvv
+     *
+     * @param string $cvv
+     * @return Card
+     */
+    public function setCvv($cvv)
+    {
+        $this->cvv = $cvv;
+
+        return $this;
+    }
+
+    /**
+     * Get cvv
+     *
+     * @return string 
+     */
+    public function getCvv()
+    {
+        return $this->cvv;
+    }
+
+    /**
+     * Set expiresAt
+     *
+     * @param \DateTime $expiresAt
+     * @return Card
+     */
+    public function setExpiresAt($expiresAt)
+    {
+        $this->expiresAt = $expiresAt;
+
+        return $this;
+    }
+
+    /**
+     * Get expiresAt
+     *
+     * @return \DateTime 
+     */
+    public function getExpiresAt()
+    {
+        return $this->expiresAt;
+    }
+}

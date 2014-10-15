@@ -146,4 +146,42 @@ class Account
 	{
 		return $this->id ? 'Account #'.$this->id : 'New Account';
 	}
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $cards;
+
+
+    /**
+     * Add cards
+     *
+     * @param \Bank\MainBundle\Entity\Card $cards
+     * @return Account
+     */
+    public function addCard(\Bank\MainBundle\Entity\Card $cards)
+    {
+        $this->cards[] = $cards;
+
+        return $this;
+    }
+
+    /**
+     * Remove cards
+     *
+     * @param \Bank\MainBundle\Entity\Card $cards
+     */
+    public function removeCard(\Bank\MainBundle\Entity\Card $cards)
+    {
+        $this->cards->removeElement($cards);
+    }
+
+    /**
+     * Get cards
+     *
+     * @return \Doctrine\Common\Collections\Collection|Card[]
+     */
+    public function getCards()
+    {
+        return $this->cards;
+    }
 }

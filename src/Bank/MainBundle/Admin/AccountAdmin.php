@@ -54,6 +54,7 @@ class AccountAdmin extends Admin{
 			->add('currency')
 			->add('balance')
 			->add('createdAt')
+			->add('cards')
 		;
 	}
 
@@ -71,6 +72,11 @@ class AccountAdmin extends Admin{
 			->add('client'/*, null, array('required' => true)*/)
 			->add('currency', 'choice', array(
 				'choices' => $this->getConfigurationPool()->getContainer()->getParameter('currencies')
+			))
+			->add('cards', 'sonata_type_collection', array(), array(
+				'edit' => 'inline',
+				'inline' => 'table',
+				'sortable' => 'position',
 			))
 		;
 	}

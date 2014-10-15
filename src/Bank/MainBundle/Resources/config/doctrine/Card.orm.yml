@@ -1,0 +1,24 @@
+Bank\MainBundle\Entity\Card:
+    type: entity
+    table: null
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        number:
+            type: string
+            length: '16'
+        cvv:
+            type: string
+            length: '3'
+        expiresAt:
+            type: date
+
+    manyToOne:
+        account:
+            targetEntity: Account
+            inversedBy: cards
+    lifecycleCallbacks: {  }

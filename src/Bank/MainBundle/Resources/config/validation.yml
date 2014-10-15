@@ -36,3 +36,10 @@ Bank\MainBundle\Entity\Account:
                 minMessage: Balance must be positive
         client:
             - NotNull: ~
+
+Bank\MainBundle\Entity\Card:
+    properties:
+        number:
+            - Regex:
+                pattern: '/^[\d]{16}$/'
+                message: Card Number must consist of exactly 16 digits

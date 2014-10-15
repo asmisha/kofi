@@ -21,4 +21,10 @@ Bank\MainBundle\Entity\Account:
             targetEntity: Client
             inversedBy: accounts
 
+    oneToMany:
+        cards:
+            targetEntity: Card
+            mappedBy: account
+            cascade: [persist]
+
     lifecycleCallbacks: {  }

@@ -260,7 +260,7 @@ class Client
     /**
      * Get accounts
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection|Account[]
      */
     public function getAccounts()
     {

@@ -1,5 +1,5 @@
 bank_api_client_list:
-    pattern:  /client/list
+    pattern:  /client/list/{id}
     defaults: { _controller: BankApiBundle:Client:list, _format: ~ }
     requirements:
         _method: POST
@@ -7,5 +7,17 @@ bank_api_client_list:
 bank_api_client_auth:
     pattern:  /client/auth
     defaults: { _controller: BankApiBundle:Client:auth, _format: ~ }
+    requirements:
+        _method: POST
+
+bank_api_erip_tree:
+    pattern:  /erip/tree
+    defaults: { _controller: BankApiBundle:Erip:tree, _format: ~ }
+    requirements:
+        _method: POST
+
+bank_api_erip_pay:
+    pattern:  /erip/pay
+    defaults: { _controller: BankApiBundle:Erip:pay, _format: ~ }
     requirements:
         _method: POST

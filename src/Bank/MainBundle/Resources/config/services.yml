@@ -2,6 +2,17 @@ parameters:
     bank_group: "Client"
 
 services:
+    sonata.admin.card:
+        class: Bank\MainBundle\Admin\CardAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "%bank_group%", label: "Card", label_translator_strategy: "sonata.admin.label.strategy.underscore" }
+        arguments:
+            - ~
+            - Bank\MainBundle\Entity\Card
+            - ~
+        calls:
+            - [ setTranslationDomain, [SonataAdminCard]]
+
     sonata.admin.client:
         class: Bank\MainBundle\Admin\ClientAdmin
         tags:
