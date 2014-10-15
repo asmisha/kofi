@@ -118,10 +118,15 @@ class Api {
 	 * @throws \Exception
 	 */
 	private function normalizeAccount($account){
-		if($account instanceof $account){
+		if($account instanceof Account){
 			return $account;
 		}elseif(intval($account)){
-			return $this->em->getRepository('BankMainBundle:Account')->find($account);
+			$account = $this->em->getRepository('BankMainBundle:Account')->find($account);
+
+			if(!($account instanceof Account)){
+				throw new \Exception(self::ACCOUNT_NOT_FOUND_MESSAGE, self::ACCOUNT_NOT_FOUND_CODE);
+			}
+
 		}else{
 			throw new \Exception(self::ACCOUNT_NOT_FOUND_MESSAGE, self::ACCOUNT_NOT_FOUND_CODE);
 		}
