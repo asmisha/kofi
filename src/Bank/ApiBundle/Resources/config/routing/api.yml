@@ -10,7 +10,7 @@ bank_api_client_auth:
     requirements:
         _method: POST
 
-bank_api_client_auth:
+bank_api_client_changePassword:
     pattern:  /client/changePassword
     defaults: { _controller: BankApiBundle:Client:changePassword, _format: ~ }
     requirements:
