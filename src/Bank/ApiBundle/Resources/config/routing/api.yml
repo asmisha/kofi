@@ -10,6 +10,12 @@ bank_api_client_auth:
     requirements:
         _method: POST
 
+bank_api_client_auth:
+    pattern:  /client/changePassword
+    defaults: { _controller: BankApiBundle:Client:changePassword, _format: ~ }
+    requirements:
+        _method: POST
+
 bank_api_erip_tree:
     pattern:  /erip/tree
     defaults: { _controller: BankApiBundle:Erip:tree, _format: ~ }
