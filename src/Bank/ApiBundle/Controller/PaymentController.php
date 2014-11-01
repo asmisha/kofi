@@ -2,7 +2,9 @@
 
 namespace Bank\ApiBundle\Controller;
 
+use Bank\ApiBundle\Services\Api;
 use Bank\MainBundle\Entity\Account;
+use Bank\MainBundle\Entity\Card;
 use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -42,10 +44,10 @@ class PaymentController extends FOSRestController
 
 		if($data['recipientBank'] == $this->get('service_container')->getParameter('bank_name')){
 			try{
-				$this->get('api')->charge($data['recipientAccountId'], $amount);
+				$this->get('api')->charge($data['recipientAccountId'], $amount, $account->getCurrency());
 			}catch(\Exception $e){
 				$this->get('monolog.logger.erip')->info($message.'FAIL');
-				$this->get('api')->charge($account, $amount);
+				$this->get('api')->charge($account, $amount, $account->getCurrency());
 
 				throw $e;
 			}

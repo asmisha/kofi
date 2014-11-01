@@ -20,7 +20,7 @@ class Account
     private $createdAt;
 
     /**
-     * @var string
+     * @var Currency
      */
     private $currency;
 
@@ -71,7 +71,7 @@ class Account
     /**
      * Set currency
      *
-     * @param string $currency
+     * @param Currency $currency
      * @return Account
      */
     public function setCurrency($currency)
@@ -84,7 +84,7 @@ class Account
     /**
      * Get currency
      *
-     * @return string 
+     * @return Currency
      */
     public function getCurrency()
     {

@@ -10,9 +10,6 @@ Bank\MainBundle\Entity\Account:
     fields:
         createdAt:
             type: datetime
-        currency:
-            type: string
-            length: 255
         balance:
             type: float
 
@@ -20,6 +17,8 @@ Bank\MainBundle\Entity\Account:
         client:
             targetEntity: Client
             inversedBy: accounts
+        currency:
+            targetEntity: Currency
 
     oneToMany:
         cards:

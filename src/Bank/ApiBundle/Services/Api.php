@@ -10,6 +10,7 @@ namespace Bank\ApiBundle\Services;
 
 use Bank\MainBundle\Entity\Account;
 use Bank\MainBundle\Entity\Client;
+use Bank\MainBundle\Entity\Currency;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -102,12 +103,13 @@ class Api {
 
 	/**
 	 * @param Account|integer $account
+	 * @param Currency $currency
 	 * @param $amount
 	 */
-	public function charge($account, $amount){
+	public function charge($account, $amount, $currency){
 		$account = $this->normalizeAccount($account);
 
-		$account->setBalance($account->getBalance() + $amount);
+		$account->setBalance($account->getBalance() + $amount * $currency->getRate() / $account->getCurrency()->getRate());
 		$this->em->persist($account);
 		$this->em->flush();
 	}

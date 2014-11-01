@@ -70,9 +70,7 @@ class AccountAdmin extends Admin{
 				'required' => false,
 			))
 			->add('client'/*, null, array('required' => true)*/)
-			->add('currency', 'choice', array(
-				'choices' => $this->getConfigurationPool()->getContainer()->getParameter('currencies')
-			))
+			->add('currency')
 			->add('cards', 'sonata_type_collection', array(), array(
 				'edit' => 'inline',
 				'inline' => 'table',

@@ -72,14 +72,14 @@ class ClientController extends FOSRestController
 				$result['accounts'][] = array(
 					'id' => $account->getId(),
 					'balance' => $account->getBalance(),
-					'currency' => $account->getCurrency(),
+					'currency' => $account->getCurrency()->getId(),
 					'cards' => array(),
 				);
 
 				foreach($account->getCards() as $card){
 					$result['accounts'][count($result['accounts']) - 1]['cards'][] = array(
-						'number' => $card->__toString(),
-						'expiresAt' => $card->getExpiresAt()->format('r')
+						'number' => $card->getNumber(),
+						'expiresAt' => $card->getExpiresAt()->getTimestamp()
 					);
 				}
 			}

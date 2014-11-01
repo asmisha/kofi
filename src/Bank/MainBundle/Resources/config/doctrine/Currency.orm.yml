@@ -1,0 +1,19 @@
+Bank\MainBundle\Entity\Currency:
+    type: entity
+    table: null
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 255
+        code:
+            type: string
+            length: 255
+        rate:
+            type: float
+    lifecycleCallbacks: {  }
