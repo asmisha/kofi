@@ -100,6 +100,6 @@ class EripController extends FOSRestController
 
 		$this->get('monolog.logger.erip')->info($message.'SUCCESS');
 
-		return $this->view();
+		return $this->view(array('success' => true));
 	}
 }
