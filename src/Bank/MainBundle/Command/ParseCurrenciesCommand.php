@@ -5,7 +5,7 @@
  * Time: 14:54
  */
 
-namespace Bank\ApiBundle\Command;
+namespace Bank\MainBundle\Command;
 
 
 use Bank\MainBundle\Entity\Currency;
@@ -35,6 +35,7 @@ class ParseCurrenciesCommand extends ContainerAwareCommand{
 
 			if(!$c){
 				$c = new Currency();
+				$c->setNameLocalized(array('ru' => $i->Name));
 			}
 
 			$c

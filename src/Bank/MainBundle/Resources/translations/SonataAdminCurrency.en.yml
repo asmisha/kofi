@@ -1,0 +1,16 @@
+breadcrumb.link_currency_list: Currency
+
+list.label_id: Id
+list.label_name: Name
+list.label_code: Code
+list.label_rate: Balance
+list.label__action: Actions
+
+form.label_id: Id
+form.label_name: Name
+form.label_name_localized: Localized Name
+form.label_code: Code
+form.label_rate: Balance
+
+filter.label_name: Name
+filter.label_code: Code

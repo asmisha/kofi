@@ -11,6 +11,8 @@ Bank\MainBundle\Entity\Currency:
         name:
             type: string
             length: 255
+        nameLocalized:
+            type: json_array
         code:
             type: string
             length: 255

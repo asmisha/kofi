@@ -18,3 +18,4 @@ parameters:
     debug_redirects:        false
     use_assetic_controller: true
     bank_name: "Гамма Е-Банк"
+    locales: ["en", "ru"]

@@ -35,6 +35,17 @@ services:
         calls:
             - [ setTranslationDomain, [SonataAdminAccount]]
 
+    sonata.admin.curency:
+        class: Bank\MainBundle\Admin\CurrencyAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "%bank_group%", label: "Currency", label_translator_strategy: "sonata.admin.label.strategy.underscore" }
+        arguments:
+            - ~
+            - Bank\MainBundle\Entity\Currency
+            - ~
+        calls:
+            - [ setTranslationDomain, [SonataAdminCurrency]]
+
     subscriber.client:
         class: Bank\MainBundle\Services\ClientSubscriber
         arguments: [@service_container]
