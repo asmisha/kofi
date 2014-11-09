@@ -113,7 +113,7 @@ fos_rest:
         view_response_listener: true
 
 monolog:
-    channels: ["erip"]
+    channels: [erip, api]
     handlers:
         bank:
             type:     stream
@@ -123,3 +123,7 @@ monolog:
             type:     stream
             path: "%kernel.logs_dir%/erip.log"
             channels: ["erip"]
+        api:
+            type:     stream
+            path: "%kernel.logs_dir%/api.log"
+            channels: ["api"]

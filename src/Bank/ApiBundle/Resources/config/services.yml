@@ -1,4 +1,4 @@
 services:
     api:
         class: Bank\ApiBundle\Services\Api
-        arguments: [@doctrine.orm.entity_manager, @request_stack]
+        arguments: [@doctrine.orm.entity_manager, @request_stack, @monolog.logger.api, %notification_url%]

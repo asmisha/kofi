@@ -5,6 +5,8 @@ namespace Bank\ApiBundle\Controller;
 use Bank\ApiBundle\Services\Api;
 use Bank\MainBundle\Entity\Account;
 use Bank\MainBundle\Entity\Card;
+use Bank\MainBundle\Entity\Operation;
+use Doctrine\ORM\QueryBuilder;
 use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -42,19 +44,107 @@ class PaymentController extends FOSRestController
 			throw $e;
 		}
 
+		$operation = new Operation();
+		$operation->setGiverAccount($account);
+
 		if($data['recipientBank'] == $this->get('service_container')->getParameter('bank_name')){
+			$recipientAccount = $this->getDoctrine()->getRepository('BankMainBundle:Account')->find($data['recipientAccountId']);
+
 			try{
-				$this->get('api')->charge($data['recipientAccountId'], $amount, $account->getCurrency());
+				$this->get('api')->deposit($recipientAccount, $amount, $account->getCurrency(), true);
 			}catch(\Exception $e){
 				$this->get('monolog.logger.erip')->info($message.'FAIL');
-				$this->get('api')->charge($account, $amount, $account->getCurrency());
+				$this->get('api')->deposit($account, $amount, $account->getCurrency());
 
 				throw $e;
 			}
+
+			$operation->setRecipientAccount($recipientAccount);
 		}
+
+		$operation
+			->setType('direct')
+			->setPaymentInfo($data)
+			->setAmount($amount)
+		;
+
+		$em = $this->getDoctrine()->getManager();
+		$em->persist($operation);
+		$em->flush();
 
 		$this->get('monolog.logger.erip')->info($message.'SUCCESS');
 
-		return $this->view();
+		return $this->view(array('success' => true));
+	}
+
+	public function reportAction(Request $request){
+		/** @var Account $account */
+		$account = $this->get('api')->getAccount();
+
+		/** @var QueryBuilder $qb */
+		$qb = $this->getDoctrine()->getRepository('BankMainBundle:Operation')->createQueryBuilder('o');
+
+		$qb
+			->select('o.type, o.amount, o.paymentInfo, o.processedAt')
+			->addSelect('ra.id recipientAccountId, rc.firstName recipientFirstName, rc.lastName recipientLastName')
+			->addSelect('ga.id giverAccountId, gc.firstName giverFirstName, gc.lastName giverLastName')
+			->leftJoin('o.recipientAccount', 'ra')
+			->leftJoin('ra.client', 'rc')
+			->leftJoin('o.giverAccount', 'ga')
+			->leftJoin('ga.client', 'gc')
+			->where('o.recipientAccount = :account OR o.giverAccount = :account')
+			->setParameter('account', $account)
+		;
+
+		if($dateFrom = $request->get('dateFrom')){
+			if(is_int($dateFrom)){
+				$dateFrom = new \DateTime();
+				$dateFrom->setTimestamp($dateFrom);
+			}else{
+				$dateFrom = new \DateTime($dateFrom);
+			}
+
+			$dateFrom->setTime(0, 0, 0);
+
+			$qb
+				->andWhere('o.processedAt >= :dateFrom')
+				->setParameter('dateFrom', $dateFrom)
+			;
+		}
+
+		if($dateTo = $request->get('dateTo')){
+			if(is_int($dateTo)){
+				$dateTo = new \DateTime();
+				$dateTo->setTimestamp($dateTo);
+			}else{
+				$dateTo = new \DateTime($dateTo);
+			}
+
+			$dateTo->setTime(23, 59, 59);
+
+			$qb
+				->andWhere('o.processedAt <= :dateTo')
+				->setParameter('dateTo', $dateTo)
+			;
+		}
+
+		if($type = $request->get('type')){
+			$qb
+				->andWhere('o.type = :type')
+				->setParameter('type', $type)
+			;
+		}
+
+		$operations = $qb->getQuery()->getResult();
+
+		foreach($operations as $k=>$o){
+			if($o['giverAccountId'] == $account->getId()){
+				$operations[$k]['amount'] = -$o['amount'];
+			}
+
+			$operations[$k]['processedAt'] = $o['processedAt']->getTimestamp();
+		}
+
+		return $this->view($operations);
 	}
 }

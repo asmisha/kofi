@@ -12,6 +12,7 @@ use Bank\MainBundle\Entity\Account;
 use Bank\MainBundle\Entity\Client;
 use Bank\MainBundle\Entity\Currency;
 use Doctrine\ORM\EntityManager;
+use Monolog\Logger;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
@@ -27,11 +28,16 @@ class Api {
 	private $em;
 	/** @var RequestStack */
 	private $requestStack;
+	/** @var Logger */
+	private $logger;
+	private $notificationUrl;
 
-	function __construct($em, $requestStack)
+	function __construct($em, $requestStack, $logger, $notificationUrl)
 	{
 		$this->em = $em;
 		$this->requestStack = $requestStack;
+		$this->notificationUrl = $notificationUrl;
+		$this->logger = $logger;
 	}
 
 	/**
@@ -104,14 +110,25 @@ class Api {
 	/**
 	 * @param Account|integer $account
 	 * @param Currency $currency
-	 * @param $amount
+	 * @param float $amount
+	 * @param bool $notify
 	 */
-	public function charge($account, $amount, $currency){
+	public function deposit($account, $amount, $currency, $notify = false){
 		$account = $this->normalizeAccount($account);
 
 		$account->setBalance($account->getBalance() + $amount * $currency->getRate() / $account->getCurrency()->getRate());
 		$this->em->persist($account);
 		$this->em->flush();
+
+		if($notify){
+			$this->notifyClient($account->getClient(), sprintf(
+				"You've been deposited %.2f %s (%.2f %s)",
+				$amount,
+				$currency->getCode(),
+				$amount * $currency->getRate() / $account->getCurrency()->getRate(),
+				$account->getCurrency()->getCode()
+			));
+		}
 	}
 
 	/**
@@ -132,5 +149,26 @@ class Api {
 		}else{
 			throw new \Exception(self::ACCOUNT_NOT_FOUND_MESSAGE, self::ACCOUNT_NOT_FOUND_CODE);
 		}
+	}
+
+	public function notifyClient(Client $client, $message){
+		$ch = curl_init($this->notificationUrl);
+		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, array(
+			'clientId' => $client->getId(),
+			'content' => $message
+		));
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+		curl_exec($ch);
+		$code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+		curl_close($ch);
+
+		$this->logger->info(sprintf(
+			'Notification sent to client %d with message "%s"; response: %d',
+			$client->getId(),
+			$message,
+			$code
+		));
 	}
 } 

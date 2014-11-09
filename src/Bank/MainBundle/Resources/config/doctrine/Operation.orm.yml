@@ -1,0 +1,27 @@
+Bank\MainBundle\Entity\Operation:
+    type: entity
+    table: null
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+
+    fields:
+        type:
+            type: string
+            length: 10
+        paymentInfo:
+            type: json_array
+        amount:
+            type: float
+        processedAt:
+            type: datetime
+
+    manyToOne:
+        giverAccount:
+            targetEntity: Account
+        recipientAccount:
+            targetEntity: Account
+    lifecycleCallbacks: {  }

@@ -3,6 +3,7 @@
 namespace Bank\ApiBundle\Controller;
 
 use Bank\MainBundle\Entity\Account;
+use Bank\MainBundle\Entity\Operation;
 use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -97,6 +98,20 @@ class EripController extends FOSRestController
 
 			throw $e;
 		}
+
+		$operation = new Operation();
+		$operation
+			->setGiverAccount($account)
+			->setType('erip')
+			->setPaymentInfo(array(
+				'payment' => $this->availablePayments[$paymentId]['name'],
+				'fields' => $fields
+			))
+			->setAmount($amount)
+		;
+		$em = $this->getDoctrine()->getManager();
+		$em->persist($operation);
+		$em->flush();
 
 		$this->get('monolog.logger.erip')->info($message.'SUCCESS');
 

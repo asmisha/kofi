@@ -34,6 +34,12 @@ bank_api_payment_pay:
     requirements:
         _method: POST
 
+bank_api_payment_report:
+    pattern:  /payment/report
+    defaults: { _controller: BankApiBundle:Payment:report, _format: ~ }
+    requirements:
+        _method: POST
+
 bank_api_currency_rates:
     pattern:  /currency/rates
     defaults: { _controller: BankApiBundle:Currency:rates, _format: ~ }

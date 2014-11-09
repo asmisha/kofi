@@ -19,3 +19,4 @@ parameters:
     use_assetic_controller: true
     bank_name: "Гамма Е-Банк"
     locales: ["en", "ru"]
+    notification_url: http://ebank-client.herokuapp.com/bank-api/notify
