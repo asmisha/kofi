@@ -10,7 +10,7 @@ class CurrencyController extends FOSRestController
 {
 	public function ratesAction(){
 		$result = $this->getDoctrine()->getRepository('BankMainBundle:Currency')->createQueryBuilder('c')
-			->select('c.id, c.code, c.rate, c.nameLocalized')
+			->select('c.id, c.code, c.rate as buyRate, c.rate as sellRate, c.nameLocalized')
 			->getQuery()
 			->getResult()
 		;

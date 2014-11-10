@@ -1,3 +1,7 @@
+10.11.2014:
+
+/currency/rates - rate => buyRate, sellRate
+
 09.11.2014:
 
 /currency/rates - вместо поля name в ответе nameLocalized - объект с ключами en, ru, ...
