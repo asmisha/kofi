@@ -48,7 +48,7 @@ class Api {
 		/** @var Request $request */
 		$request = $this->requestStack->getCurrentRequest();
 
-		$clientId = $request->get('clientId');
+		$clientId = intval($request->get('clientId'));
 
 		/** @var Client $client */
 		$client = $this->em->getRepository('BankMainBundle:Client')->findOneBy(array(
