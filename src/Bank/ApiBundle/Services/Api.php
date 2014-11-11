@@ -48,14 +48,14 @@ class Api {
 		/** @var Request $request */
 		$request = $this->requestStack->getCurrentRequest();
 
-		$clientId = intval($request->get('clientId'));
+		$clientId = $request->get('clientId');
 
 		/** @var Client $client */
 		$client = $this->em->getRepository('BankMainBundle:Client')->findOneBy(array(
 			'id' => $clientId
 		));
 
-		if(!$client || $client->getId() != $clientId){
+		if(!$client || !is_numeric($clientId)){
 			throw new \Exception(self::AUTH_FAILED_MESSAGE, self::AUTH_FAILED_CODE);
 		}
 
