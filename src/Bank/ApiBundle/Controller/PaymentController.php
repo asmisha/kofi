@@ -13,17 +13,22 @@ use Symfony\Component\HttpFoundation\Request;
 class PaymentController extends FOSRestController
 {
 	public function payAction(Request $request){
+		/** @var Account $account */
+		$account = $this->get('api')->getAccount();
+
 		$fields = array('recipientBank', 'payerName', 'code', 'recipientAccountId', 'recipientName', 'amount');
 		$data = array();
 		foreach($fields as $f){
 			if(!$request->get($f)){
-				throw new \Exception("Missing \"$f\" field");
+				if($f == 'payerName'){
+					$data[$f] = sprintf('%s %s', $account->getClient()->getFirstName(), $account->getClient()->getLastName());
+				}else{
+					throw new \Exception("Missing \"$f\" field");
+				}
+			}else{
+				$data[$f] = $request->get($f);
 			}
-			$data[$f] = $request->get($f);
 		}
-
-		/** @var Account $account */
-		$account = $this->get('api')->getAccount();
 
 		$message = sprintf(
 			'General payment from user %d (%s %s) account id %d, data %s: ',
