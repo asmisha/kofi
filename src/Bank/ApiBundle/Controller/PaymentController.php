@@ -97,7 +97,7 @@ class PaymentController extends FOSRestController
 		;
 
 		if($dateFrom = $request->get('dateFrom')){
-			if(is_int($dateFrom)){
+			if(is_numeric($dateFrom)){
 				$dateFrom = new \DateTime();
 				$dateFrom->setTimestamp($dateFrom);
 			}else{
@@ -113,7 +113,7 @@ class PaymentController extends FOSRestController
 		}
 
 		if($dateTo = $request->get('dateTo')){
-			if(is_int($dateTo)){
+			if(is_numeric($dateTo)){
 				$dateTo = new \DateTime();
 				$dateTo->setTimestamp($dateTo);
 			}else{
