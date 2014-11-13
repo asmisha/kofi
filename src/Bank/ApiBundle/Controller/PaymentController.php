@@ -103,33 +103,33 @@ class PaymentController extends FOSRestController
 
 		if($dateFrom = $request->get('dateFrom')){
 			if(is_numeric($dateFrom)){
-				$dateFrom = new \DateTime();
-				$dateFrom->setTimestamp($dateFrom);
+				$d = new \DateTime();
+				$d->setTimestamp($dateFrom);
 			}else{
-				$dateFrom = new \DateTime($dateFrom);
+				$d = new \DateTime($dateFrom);
 			}
 
-			$dateFrom->setTime(0, 0, 0);
+			$d->setTime(0, 0, 0);
 
 			$qb
 				->andWhere('o.processedAt >= :dateFrom')
-				->setParameter('dateFrom', $dateFrom)
+				->setParameter('dateFrom', $d)
 			;
 		}
 
 		if($dateTo = $request->get('dateTo')){
 			if(is_numeric($dateTo)){
-				$dateTo = new \DateTime();
-				$dateTo->setTimestamp($dateTo);
+				$d = new \DateTime();
+				$d->setTimestamp($dateTo);
 			}else{
-				$dateTo = new \DateTime($dateTo);
+				$d = new \DateTime($dateTo);
 			}
 
-			$dateTo->setTime(23, 59, 59);
+			$d->setTime(23, 59, 59);
 
 			$qb
 				->andWhere('o.processedAt <= :dateTo')
-				->setParameter('dateTo', $dateTo)
+				->setParameter('dateTo', $d)
 			;
 		}
 
