@@ -91,7 +91,7 @@ sonata_user:
     security_acl: true
     manager_type: orm # can be orm or mongodb
 sonata_admin:
-    title:      Acc Admin
+    title: Ɣ E-Bank Admin
     templates:
         layout:  BankMainBundle:CRUD:layout.html.twig
     security:
