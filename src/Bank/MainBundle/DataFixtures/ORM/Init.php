@@ -12,6 +12,7 @@ use Application\Sonata\UserBundle\Entity\User;
 use Bank\MainBundle\Entity\Account;
 use Bank\MainBundle\Entity\Card;
 use Bank\MainBundle\Entity\Client;
+use Bank\MainBundle\Entity\Currency;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
@@ -22,19 +23,28 @@ class Init implements FixtureInterface
 	 */
 	public function load(ObjectManager $om)
 	{
-		$userAdmin = new User();
-		$userAdmin
-			->setUsername('admin')
-			->setUsernameCanonical('admin')
-			->setEmail('asmisha@tut.by')
-			->setEmailCanonical('asmisha@tut.by')
-			->setPlainPassword('admin')
-			->setEnabled(true)
-			->addRole('ROLE_SUPER_ADMIN')
-			->setSuperAdmin(true)
-		;
+//		$userAdmin = new User();
+//		$userAdmin
+//			->setUsername('admin')
+//			->setUsernameCanonical('admin')
+//			->setEmail('asmisha@tut.by')
+//			->setEmailCanonical('asmisha@tut.by')
+//			->setPlainPassword('admin')
+//			->setEnabled(true)
+//			->addRole('ROLE_SUPER_ADMIN')
+//			->setSuperAdmin(true)
+//		;
+//
+//		$om->persist($userAdmin);
 
-		$om->persist($userAdmin);
+		$currency = new Currency();
+		$currency
+			->setCode('BYR')
+			->setName('Belorussian Ruble')
+			->setNameLocalized(array())
+			->setRate(1)
+		;
+		$om->persist($currency);
 
 		$names = array(
 			'Tess Murowchick',
@@ -115,7 +125,7 @@ class Init implements FixtureInterface
 				$account
 					->setBalance(mt_rand(0, 1000000))
 					->setClient($client)
-					->setCurrency('BYR')
+					->setCurrency($currency)
 				;
 				$om->persist($account);
 
