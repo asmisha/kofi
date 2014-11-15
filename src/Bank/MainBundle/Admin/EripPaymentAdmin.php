@@ -3,6 +3,7 @@
 namespace Bank\MainBundle\Admin;
 
 use Bank\MainBundle\Entity\Currency;
+use Bank\MainBundle\Entity\EripPayment;
 use Bank\MainBundle\Form\Type\GeneratedPasswordType;
 use Bank\MainBundle\Form\Type\PasswordType;
 use Sonata\AdminBundle\Admin\Admin;
@@ -13,6 +14,45 @@ use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
 
 class EripPaymentAdmin extends Admin{
+	/**
+	 * {@inheritdoc}
+	 */
+	public function getObject($id)
+	{
+		$object = parent::getObject($id);
+
+		return $this->setLocales($object);
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	public function getNewInstance()
+	{
+		$object = parent::getNewInstance();
+
+		return $this->setLocales($object);
+	}
+
+	/**
+	 * @param EripPayment $object
+	 * @return mixed
+	 */
+	private function setLocales($object){
+		$locales = $this->getConfigurationPool()->getContainer()->getParameter('locales');
+
+		foreach($object->getFields() as $f){
+			$empty = array_combine(
+				$locales,
+				array_fill(0, count($locales), '')
+			);
+
+			@$f->setErrorMessages(is_array($f->getErrorMessages()) ? array_merge($empty, $f->getErrorMessages()) : $empty);
+		}
+
+		return $object;
+	}
+
 	/**
 	 * {@inheritdoc}
 	 */
