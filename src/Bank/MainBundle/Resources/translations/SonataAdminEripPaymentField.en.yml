@@ -1,0 +1,11 @@
+breadcrumb.link_erip_payment_field_list: Erip Payment Field
+
+list.label_id: Id
+list.label_name: Name
+list.label_text: Text
+list.label_regex: Validation Regular Expression
+
+form.label_id: Id
+form.label_name: Name
+form.label_text: Text
+form.label_regex: Validation Regular Expression

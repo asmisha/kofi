@@ -1,0 +1,14 @@
+breadcrumb.link_erip_payment_list: Erip Payment
+
+list.label_id: Id
+list.label_name: Name
+list.label_category: Category
+list.label__action: Actions
+
+form.label_id: Id
+form.label_name: Name
+form.label_category: Category
+form.label_fields: Fields
+
+filter.label_name: Name
+filter.label_category: Category

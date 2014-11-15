@@ -3,76 +3,77 @@
 namespace Bank\ApiBundle\Controller;
 
 use Bank\MainBundle\Entity\Account;
+use Bank\MainBundle\Entity\EripCategory;
+use Bank\MainBundle\Entity\EripPayment;
 use Bank\MainBundle\Entity\Operation;
 use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\Request;
 
 class EripController extends BaseController
 {
-	private	$availablePayments = array(
-		1 => array(
-			'name' => 'Electricity',
-			'fields' => array('address' => 'Address'),
-			'categoryId' => 1,
-		),
-		2 => array(
-			'name' => 'Water',
-			'fields' => array('address' => 'Address'),
-			'categoryId' => 1,
-		),
-		3 => array(
-			'name' => 'Byfly',
-			'fields' => array('contractId' => 'Contract Id'),
-			'categoryId' => 2,
-		),
-		4 => array(
-			'name' => 'NIKS',
-			'fields' => array('contractId' => 'Contract Id'),
-			'categoryId' => 2,
-		),
-	);
+	public function treeAction(){
+		$categories = $this->getDoctrine()->getRepository('BankMainBundle:EripCategory')->createQueryBuilder('ec')
+			->select('ec, ep, epf')
+			->join('ec.payments', 'ep')
+			->leftJoin('ep.fields', 'epf')
+			->getQuery()
+			->getResult();
 
-	private function getTree(){
-		$categories = array(
-			1 => 'Household',
-			2 => 'Internet',
-		);
+		$data = array();
+		foreach($categories as $c){
+			/** @var EripCategory $c */
 
-		$result = array();
-		foreach($this->availablePayments as $id=>$p){
-			if(!isset($result['categories'][$p['categoryId']])){
-				$result['categories'][$p['categoryId']] = array(
-					'name' => $categories[$p['categoryId']],
-					'payments' => array(),
+			$payments = array();
+
+			foreach($c->getPayments() as $p){
+				$fields = array();
+
+				foreach($p->getFields() as $f){
+					$fields[$f->getName()] = array(
+						'name' => $f->getText(),
+						'regex' => $f->getRegex()
+					);
+				}
+
+				$payments[] = array(
+					'paymentId' => $p->getId(),
+					'name' => $p->getName(),
+					'fields' => $fields
 				);
-
-				$p['paymentId'] = $id;
-				$result['categories'][$p['categoryId']]['payments'][] = $p;
 			}
+
+			$data['categories'][$c->getId()] = array(
+				'name' => $c->getName(),
+				'payments' => $payments
+			);
 		}
 
-		return $result;
-	}
-
-	public function treeAction(){
-		return $this->view($this->getTree());
+		return $this->view($data);
 	}
 
 	public function payAction(Request $request){
 		$paymentId = $request->get('paymentId');
 
-		if(!isset($this->availablePayments[$paymentId])){
+		/** @var EripPayment $payment */
+		$payment = $this->getDoctrine()->getRepository('BankMainBundle:EripPayment')->find($paymentId);
+		if(!$payment){
 			throw new \Exception('Payment not found');
 		}
-		$payment = $this->availablePayments[$paymentId];
 
 		$fields = array();
 		$passedFields = $request->get('fields');
-		foreach($payment['fields'] as $f=>$_){
-			if(!isset($passedFields[$f])){
-				throw new \Exception("Missing \"$f\" field");
+		foreach($payment->getFields() as $f){
+			if(!isset($passedFields[$f->getName()])){
+				throw new \Exception(sprintf('Missing "%s" field', $f->getName()));
 			}
-			$fields[$f] = $passedFields[$f];
+
+			$value = $passedFields[$f->getName()];
+
+			if(!preg_match($f->getRegex(), $value)){
+				throw new \Exception(sprintf('Field %s doesn\'t match the pattern "%s"', $f->getName(), $f->getRegex()));
+			}
+
+			$fields[$f->getName()] = $passedFields[$f->getName()];
 		}
 
 		$amount = $request->get('amount');
@@ -86,7 +87,7 @@ class EripController extends BaseController
 			$account->getClient()->getFirstName(),
 			$account->getClient()->getLastName(),
 			$account->getId(),
-			$this->availablePayments[$paymentId]['name'],
+			$payment->getName(),
 			json_encode($fields),
 			$amount
 		);
@@ -104,7 +105,7 @@ class EripController extends BaseController
 			->setGiverAccount($account)
 			->setType('erip')
 			->setPaymentInfo(array(
-				'payment' => $this->availablePayments[$paymentId]['name'],
+				'payment' => $payment->getName(),
 				'fields' => $fields
 			))
 			->setAmount($amount)

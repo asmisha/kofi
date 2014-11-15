@@ -1,0 +1,26 @@
+Bank\MainBundle\Entity\EripPayment:
+    type: entity
+    table: null
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 255
+
+    manyToOne:
+        category:
+            targetEntity: EripCategory
+            inversedBy: payments
+
+    oneToMany:
+        fields:
+            targetEntity: EripPaymentField
+            mappedBy: payment
+            cascade: [persist]
+
+    lifecycleCallbacks: {  }

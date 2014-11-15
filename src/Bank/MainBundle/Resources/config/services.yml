@@ -1,5 +1,6 @@
 parameters:
     bank_group: "Client"
+    dev_group: "Dev"
 
 services:
     sonata.admin.card:
@@ -35,7 +36,7 @@ services:
         calls:
             - [ setTranslationDomain, [SonataAdminAccount]]
 
-    sonata.admin.curency:
+    sonata.admin.currency:
         class: Bank\MainBundle\Admin\CurrencyAdmin
         tags:
             - { name: sonata.admin, manager_type: orm, group: "%bank_group%", label: "Currency", label_translator_strategy: "sonata.admin.label.strategy.underscore" }
@@ -45,6 +46,39 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [SonataAdminCurrency]]
+
+    sonata.admin.eripCategory:
+        class: Bank\MainBundle\Admin\EripCategoryAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "%bank_group%", label: "Erip Category", label_translator_strategy: "sonata.admin.label.strategy.underscore" }
+        arguments:
+            - ~
+            - Bank\MainBundle\Entity\EripCategory
+            - ~
+        calls:
+            - [ setTranslationDomain, [SonataAdminEripCategory]]
+
+    sonata.admin.eripPayment:
+        class: Bank\MainBundle\Admin\EripPaymentAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "%bank_group%", label: "Erip Payment", label_translator_strategy: "sonata.admin.label.strategy.underscore" }
+        arguments:
+            - ~
+            - Bank\MainBundle\Entity\EripPayment
+            - ~
+        calls:
+            - [ setTranslationDomain, [SonataAdminEripPayment]]
+
+    sonata.admin.eripPaymentField:
+        class: Bank\MainBundle\Admin\EripPaymentFieldAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "%dev_group%", label: "Erip Payment Field", label_translator_strategy: "sonata.admin.label.strategy.underscore" }
+        arguments:
+            - ~
+            - Bank\MainBundle\Entity\EripPaymentField
+            - ~
+        calls:
+            - [ setTranslationDomain, [SonataAdminEripPaymentField]]
 
     subscriber.client:
         class: Bank\MainBundle\Services\ClientSubscriber
