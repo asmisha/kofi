@@ -19,7 +19,8 @@ class AutoPaymentType extends AbstractType
             ->add(
 				$builder
 					->create('startDate', 'text', array(
-						'invalid_message' => '"startDate" parameter should represent a valid timestamp.'
+						'invalid_message' => '"startDate" parameter should represent a valid timestamp.',
+						'required' => false,
 					))
 					->addModelTransformer(new DateTimeToTimestampTransformer())
 			)
@@ -31,15 +32,18 @@ class AutoPaymentType extends AbstractType
 					'year' => 'year',
 				),
 				'invalid_message' => '"period" parameter should be of values day, week, month or year',
+				'required' => false,
 			))
-            ->add('data')
+            ->add('data', null, array(
+				'required' => false,
+			))
             ->add('type', 'choice', array(
 				'choices' => array(
 					'erip' => 'erip',
 					'direct' => 'direct'
 				),
 				'invalid_message' => '"type" parameter should be of values erip or direct',
-				'required' => true
+				'required' => false,
 			))
         ;
     }

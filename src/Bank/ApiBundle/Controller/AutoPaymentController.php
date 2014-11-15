@@ -68,7 +68,7 @@ class AutoPaymentController extends BaseController
 		unset($fields[Api::ACCOUNT_ID_KEY]);
 
         $form = $this->createCreateForm($entity);
-        $form->submit($fields);
+        $form->submit($fields, false);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
