@@ -31,7 +31,8 @@ class EripController extends BaseController
 				foreach($p->getFields() as $f){
 					$fields[$f->getName()] = array(
 						'name' => $f->getText(),
-						'regex' => $f->getRegex()
+						'regex' => $f->getRegex(),
+						'errorMessage' => $f->getErrorMessages()
 					);
 				}
 
@@ -69,7 +70,7 @@ class EripController extends BaseController
 
 			$value = $passedFields[$f->getName()];
 
-			if(!preg_match($f->getRegex(), $value)){
+			if(!preg_match('/'.$f->getRegex().'/', $value)){
 				throw new \Exception(sprintf('Field %s doesn\'t match the pattern "%s"', $f->getName(), $f->getRegex()));
 			}
 
