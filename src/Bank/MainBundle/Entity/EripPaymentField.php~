@@ -27,7 +27,7 @@ class EripPaymentField
     /**
      * @var string
      */
-    private $regex;
+    private $regex = '/^.*$/';
 
 
     /**
@@ -107,5 +107,33 @@ class EripPaymentField
     public function getRegex()
     {
         return $this->regex;
+    }
+    /**
+     * @var \Bank\MainBundle\Entity\EripPayment
+     */
+    private $payment;
+
+
+    /**
+     * Set payment
+     *
+     * @param \Bank\MainBundle\Entity\EripPayment $payment
+     * @return EripPaymentField
+     */
+    public function setPayment(\Bank\MainBundle\Entity\EripPayment $payment = null)
+    {
+        $this->payment = $payment;
+
+        return $this;
+    }
+
+    /**
+     * Get payment
+     *
+     * @return \Bank\MainBundle\Entity\EripPayment 
+     */
+    public function getPayment()
+    {
+        return $this->payment;
     }
 }

@@ -136,4 +136,32 @@ class EripPaymentField
     {
         return $this->payment;
     }
+    /**
+     * @var array
+     */
+    private $errorMessages;
+
+
+    /**
+     * Set errorMessages
+     *
+     * @param array $errorMessages
+     * @return EripPaymentField
+     */
+    public function setErrorMessages($errorMessages)
+    {
+        $this->errorMessages = $errorMessages;
+
+        return $this;
+    }
+
+    /**
+     * Get errorMessages
+     *
+     * @return array 
+     */
+    public function getErrorMessages()
+    {
+        return $this->errorMessages;
+    }
 }

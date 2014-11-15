@@ -9,3 +9,4 @@ form.label_id: Id
 form.label_name: Name
 form.label_text: Text
 form.label_regex: Validation Regular Expression
+form.label_error_messages: Validation Messages

@@ -17,6 +17,8 @@ Bank\MainBundle\Entity\EripPaymentField:
         regex:
             type: string
             length: 255
+        errorMessages:
+            type: json_array
 
     manyToOne:
         payment:
