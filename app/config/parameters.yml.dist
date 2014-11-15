@@ -20,3 +20,4 @@ parameters:
     bank_name: "Гамма Е-Банк"
     locales: ["en", "ru"]
     notification_url: http://ebank-client.herokuapp.com/bank-api/notify
+    security.acl.permission.map.class: Sonata\AdminBundle\Security\Acl\Permission\AdminPermissionMap
