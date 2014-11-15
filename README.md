@@ -27,6 +27,10 @@ $ curl -s -X POST -d clientId=31 -d accountId=23 -d startDate='1416043413' -d pe
 /autopayment/{id}/delete
 $ curl -s -X POST -d clientId=31 -d accountId=23 kofi.local/api/autopayment/2/delete; echo ''{"response":{"success":true},"serverTime":1416048480}
 
+Notification:
+type: newDeposit
+data: initialAmount, initialCurrency, accountAmount, accountCurrency
+
 ======
 
 10.11.2014:

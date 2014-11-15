@@ -24,6 +24,8 @@ class Api {
 	const INSUFFICIENT_FUNDS_CODE = 3;
 	const INSUFFICIENT_FUNDS_MESSAGE = 'Insufficient funds';
 
+	const NOTIFICATION_TYPE_NEW_DEPOSIT = 'newDeposit';
+
 	/** @var EntityManager */
 	private $em;
 	/** @var RequestStack */
@@ -126,12 +128,11 @@ class Api {
 		$this->em->flush();
 
 		if($notify){
-			$this->notifyClient($account->getClient(), sprintf(
-				"You've been deposited %.2f %s (%.2f %s)",
-				$amount,
-				$currency->getCode(),
-				$amount * $currency->getRate() / $account->getCurrency()->getRate(),
-				$account->getCurrency()->getCode()
+			$this->notifyClient($account->getClient(), self::NOTIFICATION_TYPE_NEW_DEPOSIT, array(
+				'initialAmount' => $amount,
+				'initialCurrency' => $currency->getCode(),
+				'accountAmount' => $amount * $currency->getRate() / $account->getCurrency()->getRate(),
+				'accountCurrency' => $account->getCurrency()->getCode()
 			));
 		}
 	}
@@ -154,14 +155,17 @@ class Api {
 		}else{
 			throw new \Exception(self::ACCOUNT_NOT_FOUND_MESSAGE, self::ACCOUNT_NOT_FOUND_CODE);
 		}
+
+		return null;
 	}
 
-	public function notifyClient(Client $client, $message){
+	public function notifyClient(Client $client, $type, $data){
 		$ch = curl_init($this->notificationUrl);
 		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, array(
 			'clientId' => $client->getId(),
-			'content' => $message
+			'type' => $type,
+			'data' => $data,
 		));
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
@@ -170,9 +174,10 @@ class Api {
 		curl_close($ch);
 
 		$this->logger->info(sprintf(
-			'Notification sent to client %d with message "%s"; response: %d',
+			'Notification sent to client %d with type "%s", data %s; response: %d',
 			$client->getId(),
-			$message,
+			$type,
+			json_encode($data),
 			$code
 		));
 	}
