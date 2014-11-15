@@ -10,7 +10,7 @@ use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
 
-class ClientController extends FOSRestController
+class ClientController extends BaseController
 {
 	public function listAction($id, Request $request){
 		/** @var QueryBuilder $qb */
@@ -22,38 +22,6 @@ class ClientController extends FOSRestController
 			->where('c.id = :id')
 			->setParameter('id', $id)
 		;
-
-//		if($query = $request->get('query')){
-//			$words = explode(' ', $query);
-//			foreach($words as $k => $w){
-//				$p = 'param'.$k;
-//				$qb
-//					->andWhere("c.firstName LIKE :$p OR c.middleName LIKE :$p OR c.lastName LIKE :$p OR c.passportSeries LIKE :$p")
-//					->setParameter($p, "%$w%");
-//				;
-//			}
-//		}
-//
-//		$searchFields = array('firstName', 'middleName', 'lastName', 'passportSeries');
-//		foreach($searchFields as $f){
-//			if($v = $request->get($f)){
-//				$qb
-//					->andWhere("c.$f LIKE :$f")
-//					->setParameter($f, "%$v%");
-//				;
-//			}
-//		}
-//
-//		$intFields = array('passportNumber', 'id');
-//
-//		foreach($intFields as $f){
-//			if($v = $request->get($f)){
-//				$qb
-//					->andWhere("c.$f = :$f")
-//					->setParameter($f, $v);
-//				;
-//			}
-//		}
 
 		/** @var Client $client */
 		$client = $qb->getQuery()->getSingleResult();

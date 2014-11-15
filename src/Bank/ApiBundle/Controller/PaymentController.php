@@ -10,7 +10,7 @@ use Doctrine\ORM\QueryBuilder;
 use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\Request;
 
-class PaymentController extends FOSRestController
+class PaymentController extends BaseController
 {
 	public function payAction(Request $request){
 		/** @var Account $account */

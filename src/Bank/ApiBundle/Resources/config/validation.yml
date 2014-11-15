@@ -1,0 +1,17 @@
+Bank\MainBundle\Entity\AutoPayment:
+    properties:
+        startDate:
+            - DateTime: ~
+        type:
+            - NotNull:
+                message: 'You should specify the "type" paremeter'
+            - Choice:
+                choices:  [erip, direct]
+                message:  '"type" parameter should be of values erip or direct'
+                strict: true
+        period:
+            - NotNull:
+                message: 'You should specify the "period" paremeter'
+            - Choice:
+                choices:  [day, week, month, year]
+                message:  '"period" parameter should be of values day, week, month or year'

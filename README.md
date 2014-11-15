@@ -1,6 +1,39 @@
+15.11.2014:
+
+Поменялась структура ответа всех методов. Если раньше возвращалось data, то теперь - {response: data, serverTime: %timestamp%}
+
+/autopayment/create
+Параметры:
+  accountId
+  startDate - timestamp с какого времени начинать платить, по умолчанию - время сервера
+  period - day, week, month, year
+  type - тип платежа, erip или direct
+  data - все поля, которые передаются в /payment/pay или /erip/pay при type=erip или type=direct соответственно
+
+$ curl -s -X POST -d clientId=31 -d accountId=23 -d startDate='1416043413' -d period=week -d 'data[recipientBank]=a&data[payerName]=w&data[code]=e&data[recipientAccountId]=24&data[recipientName]=r&data[amount]=1' -d type=director kofi.local/api/autopayment/create; echo ''
+{"response":{"success":false,"errors":{"type":["\"type\" parameter should be of values erip or direct"]}},"serverTime":1416046920}
+$ curl -s -X POST -d clientId=31 -d accountId=23 -d startDate='1416043413' -d period=week -d 'data[recipientBank]=a&data[payerName]=w&data[code]=e&data[recipientAccountId]=24&data[recipientName]=r&data[amount]=1' -d type=direct kofi.local/api/autopayment/create; echo ''
+{"response":{"success":true,"id":4},"serverTime":1416047841}
+
+/autopayment/list
+$ curl -s -X POST -d clientId=31 -d accountId=23 kofi.local/api/autopayment/list; echo ''
+{"response":[{"id":2,"startDate":1416032613,"period":"week","type":"erip","data":"asd"},{"id":3,"startDate":1416032613,"period":"week","type":"erip","data":{"recipientBank":"a","payerName":"w","code":"e","recipientAccountId":"24","recipientName":"r","amount":"1"},"lastPayment":1415912400},{"id":4,"startDate":1416032613,"period":"week","type":"erip","data":{"recipientBank":"a","payerName":"w","code":"e","recipientAccountId":"24","recipientName":"r","amount":"1"}}],"serverTime":1416048154}
+
+/autopayment/{id}/update
+Параметры такие же, как в методе /autopayment/create
+$ curl -s -X POST -d clientId=31 -d accountId=23 -d startDate='1416043413' -d period=week -d 'data[recipientBank]=b&data[payerName]=w&data[code]=e&data[recipientAccountId]=24&data[recipientName]=r&data[amount]=3' -d type=erip kofi.local/api/autopayment/4/update; echo ''
+{"response":{"success":true,"id":4},"serverTime":1416048411}
+
+/autopayment/{id}/delete
+$ curl -s -X POST -d clientId=31 -d accountId=23 kofi.local/api/autopayment/2/delete; echo ''{"response":{"success":true},"serverTime":1416048480}
+
+======
+
 10.11.2014:
 
 /currency/rates - rate => buyRate, sellRate
+
+======
 
 09.11.2014:
 
@@ -24,7 +57,7 @@
 
 /client/list/{id} - информация о клиенте
 
-Во все методы методы дальше нужно передавать clientId, в методы
+Во все методы методы дальше нужно передавать clientId
 
 /client/auth - авторизация
 параметры: password

@@ -1,0 +1,23 @@
+autopayment_list:
+    path:     /list
+    defaults: { _controller: "BankApiBundle:AutoPayment:list" }
+    requirements:
+        _method: POST
+
+autopayment_create:
+    path:     /create
+    defaults: { _controller: "BankApiBundle:AutoPayment:update", id: null }
+    requirements:
+        _method: POST
+
+autopayment_update:
+    path:     /{id}/update
+    defaults: { _controller: "BankApiBundle:AutoPayment:update" }
+    requirements:
+        _method: POST
+
+autopayment_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "BankApiBundle:AutoPayment:delete" }
+    requirements:
+        _method: POST

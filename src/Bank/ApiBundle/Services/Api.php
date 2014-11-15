@@ -32,6 +32,9 @@ class Api {
 	private $logger;
 	private $notificationUrl;
 
+	const CLIENT_ID_KEY = 'clientId';
+	const ACCOUNT_ID_KEY = 'accountId';
+
 	function __construct($em, $requestStack, $logger, $notificationUrl)
 	{
 		$this->em = $em;
@@ -48,7 +51,7 @@ class Api {
 		/** @var Request $request */
 		$request = $this->requestStack->getCurrentRequest();
 
-		$clientId = $request->get('clientId');
+		$clientId = $request->get(self::CLIENT_ID_KEY);
 
 		/** @var Client $client */
 		$client = $this->em->getRepository('BankMainBundle:Client')->findOneBy(array(
@@ -72,7 +75,7 @@ class Api {
 
 		/** @var Account $account */
 		$account = $this->em->getRepository('BankMainBundle:Account')->findOneBy(array(
-			'id' => $request->get('accountId')
+			'id' => $request->get(self::ACCOUNT_ID_KEY)
 		));
 
 		if(!$account){

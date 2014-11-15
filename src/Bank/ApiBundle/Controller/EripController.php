@@ -7,7 +7,7 @@ use Bank\MainBundle\Entity\Operation;
 use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\Request;
 
-class EripController extends FOSRestController
+class EripController extends BaseController
 {
 	private	$availablePayments = array(
 		1 => array(

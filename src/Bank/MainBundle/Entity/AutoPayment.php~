@@ -1,0 +1,167 @@
+<?php
+
+namespace Bank\MainBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * AutoPayment
+ */
+class AutoPayment
+{
+    /**
+     * @var integer
+     */
+    private $id;
+
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+    /**
+     * @var \DateTime
+     */
+    private $startDate;
+
+    /**
+     * @var string
+     */
+    private $period;
+
+    /**
+     * @var array
+     */
+    private $data;
+
+    /**
+     * @var \DateTime
+     */
+    private $lastPayment;
+
+
+    /**
+     * Set startDate
+     *
+     * @param \DateTime $startDate
+     * @return AutoPayment
+     */
+    public function setStartDate($startDate)
+    {
+        $this->startDate = $startDate;
+
+        return $this;
+    }
+
+    /**
+     * Get startDate
+     *
+     * @return \DateTime 
+     */
+    public function getStartDate()
+    {
+        return $this->startDate;
+    }
+
+    /**
+     * Set period
+     *
+     * @param string $period
+     * @return AutoPayment
+     */
+    public function setPeriod($period)
+    {
+        $this->period = $period;
+
+        return $this;
+    }
+
+    /**
+     * Get period
+     *
+     * @return string 
+     */
+    public function getPeriod()
+    {
+        return $this->period;
+    }
+
+    /**
+     * Set data
+     *
+     * @param array $data
+     * @return AutoPayment
+     */
+    public function setData($data)
+    {
+        $this->data = $data;
+
+        return $this;
+    }
+
+    /**
+     * Get data
+     *
+     * @return array 
+     */
+    public function getData()
+    {
+        return $this->data;
+    }
+
+    /**
+     * Set lastPayment
+     *
+     * @param \DateTime $lastPayment
+     * @return AutoPayment
+     */
+    public function setLastPayment($lastPayment)
+    {
+        $this->lastPayment = $lastPayment;
+
+        return $this;
+    }
+
+    /**
+     * Get lastPayment
+     *
+     * @return \DateTime 
+     */
+    public function getLastPayment()
+    {
+        return $this->lastPayment;
+    }
+    /**
+     * @var string
+     */
+    private $type;
+
+
+    /**
+     * Set type
+     *
+     * @param string $type
+     * @return AutoPayment
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return string 
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+}

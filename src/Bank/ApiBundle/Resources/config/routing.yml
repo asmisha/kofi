@@ -2,3 +2,9 @@ bank_api_api:
     resource: "@BankApiBundle/Resources/config/routing/api.yml"
     prefix:   /api
     type: rest
+
+bank_api_autopayment:
+    resource: "@BankApiBundle/Resources/config/routing/autopayment.yml"
+    prefix:   /api/autopayment
+    type: rest
+
