@@ -72,7 +72,9 @@ class EripPaymentFieldAdmin extends Admin{
 			->add('name')
 			->add('text')
 			->add('regex')
-			->add('errorMessages', 'collection')
+			->add('errorMessages', 'collection', array(
+				'allow_add' => true,
+			))
 		;
 	}
 }

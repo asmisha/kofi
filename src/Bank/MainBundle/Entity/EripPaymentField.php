@@ -139,7 +139,7 @@ class EripPaymentField
     /**
      * @var array
      */
-    private $errorMessages;
+    private $errorMessages = array('en' => '', 'ru' => '', 'be' => '');
 
 
     /**
