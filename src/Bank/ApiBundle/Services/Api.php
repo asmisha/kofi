@@ -180,8 +180,8 @@ class Api {
 		$this->logger->info(sprintf(
 			'Notification sent to url "%s" with post %s %s; response: %d',
 			$this->notificationUrl,
-			json_encode($post),
-			json_encode($data),
+			var_export($post, true),
+			var_export($data, true),
 			$code
 		));
 	}
