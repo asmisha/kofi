@@ -173,16 +173,16 @@ class Api {
 		curl_setopt($ch, CURLOPT_TIMEOUT, 10);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
-		curl_exec($ch);
+		$response = curl_exec($ch);
 		$code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 		curl_close($ch);
 
 		$this->logger->info(sprintf(
-			'Notification sent to url "%s" with post %s %s; response: %d',
+			'Notification sent to url "%s" with post %s; response: %d %s',
 			$this->notificationUrl,
-			var_export($post, true),
-			var_export($data, true),
-			$code
+			json_encode($post, true),
+			$code,
+			$response
 		));
 	}
 } 
