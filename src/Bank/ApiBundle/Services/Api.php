@@ -166,7 +166,7 @@ class Api {
 		$post = array(
 			'clientId' => $client->getId(),
 			'type' => $type,
-			'data' => $data,
+			'data' => json_encode($data),
 		);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
 
