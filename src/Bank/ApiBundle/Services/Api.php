@@ -162,11 +162,14 @@ class Api {
 	public function notifyClient(Client $client, $type, $data){
 		$ch = curl_init($this->notificationUrl);
 		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-		curl_setopt($ch, CURLOPT_POSTFIELDS, array(
+
+		$post = array(
 			'clientId' => $client->getId(),
 			'type' => $type,
 			'data' => $data,
-		));
+		);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
 		curl_exec($ch);
@@ -174,10 +177,9 @@ class Api {
 		curl_close($ch);
 
 		$this->logger->info(sprintf(
-			'Notification sent to client %d with type "%s", data %s; response: %d',
-			$client->getId(),
-			$type,
-			json_encode($data),
+			'Notification sent to url "%s" with post %s; response: %d',
+			$this->notificationUrl,
+			json_encode($post),
 			$code
 		));
 	}
