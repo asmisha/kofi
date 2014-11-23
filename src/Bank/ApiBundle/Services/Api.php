@@ -169,7 +169,7 @@ class Api {
 			'clientId' => $client->getId(),
 			'content' => json_encode($data),
 		);
-		curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($post));
 
 		curl_setopt($ch, CURLOPT_TIMEOUT, 10);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
