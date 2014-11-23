@@ -171,8 +171,6 @@ class Api {
 		);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($post));
 
-		curl_setopt($ch, CURLOPT_TIMEOUT, 10);
-
 		curl_exec($ch);
 		$code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
