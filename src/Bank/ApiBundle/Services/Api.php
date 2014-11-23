@@ -170,6 +170,7 @@ class Api {
 			'content' => json_encode($data),
 		);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($post));
+		curl_setopt($ch, CURLINFO_HEADER_OUT, true);
 
 		curl_exec($ch);
 		$code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
