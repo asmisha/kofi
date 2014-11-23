@@ -178,7 +178,7 @@ class Api {
 		$code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
 		$this->logger->info(sprintf(
-			'Notification sent to url "%s" with post %s; response: %d %d %s',
+			'Notification sent to url "%s" with post %s; response: %d %s',
 			$this->notificationUrl,
 			http_build_query($post),
 			$code,
