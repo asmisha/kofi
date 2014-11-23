@@ -177,8 +177,8 @@ class Api {
 		$this->logger->info(sprintf(
 			'Notification sent to url "%s" with post %s %s; response: %d %s',
 			$this->notificationUrl,
-			var_export(http_build_query($post), true),
-			curl_getinfo($ch),
+			http_build_query($post),
+			var_export(curl_getinfo($ch), true),
 			$code,
 			curl_error($ch)
 		));
