@@ -171,6 +171,7 @@ class Api {
 		);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($post));
 		curl_setopt($ch, CURLINFO_HEADER_OUT, true);
+		curl_setopt($ch, CURLOPT_USERAGENT, 'curl/7.37.1');
 
 		curl_exec($ch);
 		$code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
