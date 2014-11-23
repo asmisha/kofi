@@ -170,7 +170,7 @@ class Api {
 		);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
 
-		curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+//		curl_setopt($ch, CURLOPT_TIMEOUT, 10);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
 		$response = curl_exec($ch);
