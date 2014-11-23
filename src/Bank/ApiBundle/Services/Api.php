@@ -163,14 +163,15 @@ class Api {
 		$ch = curl_init($this->notificationUrl);
 		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
 
+		$data['type'] = $type;
+
 		$post = array(
 			'clientId' => $client->getId(),
-			'type' => $type,
 			'content' => json_encode($data),
 		);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
 
-//		curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+		curl_setopt($ch, CURLOPT_TIMEOUT, 10);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
 		$response = curl_exec($ch);
