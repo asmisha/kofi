@@ -56,7 +56,7 @@ class PaymentController extends BaseController
 			$recipientAccount = $this->getDoctrine()->getRepository('BankMainBundle:Account')->find($data['recipientAccountId']);
 
 			try{
-				$this->get('api')->deposit($recipientAccount, $amount, $account->getCurrency(), true);
+				$this->get('api')->deposit($recipientAccount, $amount, $account->getCurrency(), true, $account);
 			}catch(\Exception $e){
 				$this->get('monolog.logger.erip')->info($message.'FAIL');
 				$this->get('api')->deposit($account, $amount, $account->getCurrency());

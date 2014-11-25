@@ -116,12 +116,14 @@ class Api {
 
 	/**
 	 * @param Account|integer $account
+	 * @param $amount
 	 * @param Currency $currency
-	 * @param float $amount
 	 * @param bool $notify
+	 * @param Account|integer|null $payerAccount
 	 */
-	public function deposit($account, $amount, $currency, $notify = false){
+	public function deposit($account, $amount, $currency, $notify = false, $payerAccount = null){
 		$account = $this->normalizeAccount($account);
+		$payerAccount = $this->normalizeAccount($payerAccount);
 
 		$account->setBalance($account->getBalance() + $amount * $currency->getRate() / $account->getCurrency()->getRate());
 		$this->em->persist($account);
@@ -132,7 +134,9 @@ class Api {
 				'initialAmount' => $amount,
 				'initialCurrency' => $currency->getCode(),
 				'accountAmount' => $amount * $currency->getRate() / $account->getCurrency()->getRate(),
-				'accountCurrency' => $account->getCurrency()->getCode()
+				'accountCurrency' => $account->getCurrency()->getCode(),
+				'payerAccountId' =>  $payerAccount ? $payerAccount->getId() : null,
+				'recipientAccountId' =>  $account ? $account->getId() : null,
 			));
 		}
 	}
