@@ -9,8 +9,7 @@ Bank\MainBundle\Entity\EripPayment:
                 strategy: AUTO
     fields:
         name:
-            type: string
-            length: 255
+            type: json_array
 
     manyToOne:
         category:

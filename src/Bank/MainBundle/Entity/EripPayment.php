@@ -15,12 +15,6 @@ class EripPayment
     private $id;
 
     /**
-     * @var string
-     */
-    private $name;
-
-
-    /**
      * Get id
      *
      * @return integer 
@@ -30,28 +24,6 @@ class EripPayment
         return $this->id;
     }
 
-    /**
-     * Set name
-     *
-     * @param string $name
-     * @return EripPayment
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * Get name
-     *
-     * @return string 
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
@@ -126,5 +98,33 @@ class EripPayment
     public function getCategory()
     {
         return $this->category;
+    }
+    /**
+     * @var array
+     */
+    private $name;
+
+
+    /**
+     * Set name
+     *
+     * @param array $name
+     * @return EripPayment
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return array 
+     */
+    public function getName()
+    {
+        return $this->name;
     }
 }

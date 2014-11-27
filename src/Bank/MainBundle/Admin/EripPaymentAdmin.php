@@ -21,7 +21,9 @@ class EripPaymentAdmin extends Admin{
 	{
 		$object = parent::getObject($id);
 
-		return $this->setLocales($object);
+		$this->localize($object);
+
+		return $object;
 	}
 
 	/**
@@ -31,26 +33,25 @@ class EripPaymentAdmin extends Admin{
 	{
 		$object = parent::getNewInstance();
 
-		return $this->setLocales($object);
+		$this->localize($object);
+
+		return $object;
 	}
 
 	/**
 	 * @param EripPayment $object
-	 * @return mixed
 	 */
-	private function setLocales($object){
-		$locales = $this->getConfigurationPool()->getContainer()->getParameter('locales');
+	private function localize($object){
+		$this->getConfigurationPool()->getContainer()->get('localizator')->setLocales($object, array(
+			'Name',
+		));
 
 		foreach($object->getFields() as $f){
-			$empty = array_combine(
-				$locales,
-				array_fill(0, count($locales), '')
-			);
-
-			@$f->setErrorMessages(is_array($f->getErrorMessages()) ? array_merge($empty, $f->getErrorMessages()) : $empty);
+			$this->getConfigurationPool()->getContainer()->get('localizator')->setLocales($f, array(
+				'Text',
+				'ErrorMessages',
+			));
 		}
-
-		return $object;
 	}
 
 	/**
@@ -61,7 +62,7 @@ class EripPaymentAdmin extends Admin{
 		$listMapper
 			->addIdentifier('id')
 			->add('category', null, array('editable' => true))
-			->add('name', null, array('editable' => true))
+			->add('name', 'array')
 			// You may also specify the actions you want to be displayed in the list
 			->add('_action', 'actions', array(
 				'actions' => array(
@@ -77,7 +78,9 @@ class EripPaymentAdmin extends Admin{
 	protected function configureFormFields(FormMapper $formMapper)
 	{
 		$formMapper
-			->add('name')
+			->add('name', 'collection', array(
+				'allow_add' => true,
+			))
 			->add('category')
 			->add('fields', 'sonata_type_collection', array(
 				'by_reference' => false

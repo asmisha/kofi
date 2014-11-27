@@ -20,14 +20,24 @@ class EripPaymentField
     private $name;
 
     /**
-     * @var string
+     * @var array
      */
     private $text;
 
     /**
      * @var string
      */
-    private $regex = '/^.*$/';
+    private $regex;
+
+    /**
+     * @var array
+     */
+    private $errorMessages;
+
+    /**
+     * @var \Bank\MainBundle\Entity\EripPayment
+     */
+    private $payment;
 
 
     /**
@@ -66,7 +76,7 @@ class EripPaymentField
     /**
      * Set text
      *
-     * @param string $text
+     * @param array $text
      * @return EripPaymentField
      */
     public function setText($text)
@@ -79,7 +89,7 @@ class EripPaymentField
     /**
      * Get text
      *
-     * @return string 
+     * @return array 
      */
     public function getText()
     {
@@ -108,11 +118,29 @@ class EripPaymentField
     {
         return $this->regex;
     }
-    /**
-     * @var \Bank\MainBundle\Entity\EripPayment
-     */
-    private $payment;
 
+    /**
+     * Set errorMessages
+     *
+     * @param array $errorMessages
+     * @return EripPaymentField
+     */
+    public function setErrorMessages($errorMessages)
+    {
+        $this->errorMessages = $errorMessages;
+
+        return $this;
+    }
+
+    /**
+     * Get errorMessages
+     *
+     * @return array 
+     */
+    public function getErrorMessages()
+    {
+        return $this->errorMessages;
+    }
 
     /**
      * Set payment

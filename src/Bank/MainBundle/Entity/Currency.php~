@@ -112,4 +112,32 @@ class Currency
 	public function __toString(){
 		return $this->name;
 	}
+    /**
+     * @var array
+     */
+    private $nameLocalized;
+
+
+    /**
+     * Set nameLocalized
+     *
+     * @param array $nameLocalized
+     * @return Currency
+     */
+    public function setNameLocalized($nameLocalized)
+    {
+        $this->nameLocalized = $nameLocalized;
+
+        return $this;
+    }
+
+    /**
+     * Get nameLocalized
+     *
+     * @return array 
+     */
+    public function getNameLocalized()
+    {
+        return $this->nameLocalized;
+    }
 }

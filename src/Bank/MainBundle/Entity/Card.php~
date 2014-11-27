@@ -108,4 +108,36 @@ class Card
     {
         return $this->expiresAt;
     }
+    /**
+     * @var \Bank\MainBundle\Entity\Account
+     */
+    private $account;
+
+
+    /**
+     * Set account
+     *
+     * @param \Bank\MainBundle\Entity\Account $account
+     * @return Card
+     */
+    public function setAccount(\Bank\MainBundle\Entity\Account $account = null)
+    {
+        $this->account = $account;
+
+        return $this;
+    }
+
+    /**
+     * Get account
+     *
+     * @return \Bank\MainBundle\Entity\Account 
+     */
+    public function getAccount()
+    {
+        return $this->account;
+    }
+
+	public function __toString(){
+		return substr_replace($this->getNumber(), str_repeat('*', 8), 4, 8);
+	}
 }

@@ -20,14 +20,24 @@ class EripPaymentField
     private $name;
 
     /**
-     * @var string
+     * @var array
      */
     private $text;
 
     /**
      * @var string
      */
-    private $regex = '/^.*$/';
+    private $regex;
+
+    /**
+     * @var array
+     */
+    private $errorMessages;
+
+    /**
+     * @var \Bank\MainBundle\Entity\EripPayment
+     */
+    private $payment;
 
 
     /**
@@ -66,7 +76,7 @@ class EripPaymentField
     /**
      * Set text
      *
-     * @param string $text
+     * @param array $text
      * @return EripPaymentField
      */
     public function setText($text)
@@ -79,7 +89,7 @@ class EripPaymentField
     /**
      * Get text
      *
-     * @return string 
+     * @return array 
      */
     public function getText()
     {
@@ -108,39 +118,6 @@ class EripPaymentField
     {
         return $this->regex;
     }
-    /**
-     * @var \Bank\MainBundle\Entity\EripPayment
-     */
-    private $payment;
-
-
-    /**
-     * Set payment
-     *
-     * @param \Bank\MainBundle\Entity\EripPayment $payment
-     * @return EripPaymentField
-     */
-    public function setPayment(\Bank\MainBundle\Entity\EripPayment $payment = null)
-    {
-        $this->payment = $payment;
-
-        return $this;
-    }
-
-    /**
-     * Get payment
-     *
-     * @return \Bank\MainBundle\Entity\EripPayment 
-     */
-    public function getPayment()
-    {
-        return $this->payment;
-    }
-    /**
-     * @var array
-     */
-    private $errorMessages = array('en' => '', 'ru' => '', 'be' => '');
-
 
     /**
      * Set errorMessages
@@ -163,5 +140,28 @@ class EripPaymentField
     public function getErrorMessages()
     {
         return $this->errorMessages;
+    }
+
+    /**
+     * Set payment
+     *
+     * @param \Bank\MainBundle\Entity\EripPayment $payment
+     * @return EripPaymentField
+     */
+    public function setPayment(\Bank\MainBundle\Entity\EripPayment $payment = null)
+    {
+        $this->payment = $payment;
+
+        return $this;
+    }
+
+    /**
+     * Get payment
+     *
+     * @return \Bank\MainBundle\Entity\EripPayment 
+     */
+    public function getPayment()
+    {
+        return $this->payment;
     }
 }

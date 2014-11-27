@@ -15,12 +15,6 @@ class EripCategory
     private $id;
 
     /**
-     * @var string
-     */
-    private $name;
-
-
-    /**
      * Get id
      *
      * @return integer 
@@ -30,28 +24,6 @@ class EripCategory
         return $this->id;
     }
 
-    /**
-     * Set name
-     *
-     * @param string $name
-     * @return EripCategory
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * Get name
-     *
-     * @return string 
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
@@ -99,6 +71,34 @@ class EripCategory
     }
 
 	public function __toString(){
-		return $this->name;
+		return $this->name['en'] ? $this->name['en'] : '';
 	}
+    /**
+     * @var array
+     */
+    private $name;
+
+
+    /**
+     * Set name
+     *
+     * @param array $name
+     * @return EripCategory
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return array 
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
 }

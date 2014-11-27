@@ -2,6 +2,7 @@ breadcrumb.link_erip_category_list: Erip Category
 
 list.label_id: Id
 list.label_name: Name
+list.label__action: Actions
 
 form.label_id: Id
 form.label_name: Name

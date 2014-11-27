@@ -12,8 +12,7 @@ Bank\MainBundle\Entity\EripPaymentField:
             type: string
             length: 255
         text:
-            type: string
-            length: 255
+            type: json_array
         regex:
             type: string
             length: 255

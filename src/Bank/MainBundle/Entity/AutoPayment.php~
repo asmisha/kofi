@@ -164,4 +164,32 @@ class AutoPayment
     {
         return $this->type;
     }
+    /**
+     * @var \Bank\MainBundle\Entity\Account
+     */
+    private $account;
+
+
+    /**
+     * Set account
+     *
+     * @param \Bank\MainBundle\Entity\Account $account
+     * @return AutoPayment
+     */
+    public function setAccount(\Bank\MainBundle\Entity\Account $account = null)
+    {
+        $this->account = $account;
+
+        return $this;
+    }
+
+    /**
+     * Get account
+     *
+     * @return \Bank\MainBundle\Entity\Account 
+     */
+    public function getAccount()
+    {
+        return $this->account;
+    }
 }

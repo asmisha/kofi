@@ -21,7 +21,9 @@ class EripPaymentFieldAdmin extends Admin{
 	{
 		$object = parent::getObject($id);
 
-		return $this->setLocales($object);
+		$this->localize($object);
+
+		return $object;
 	}
 
 	/**
@@ -31,23 +33,16 @@ class EripPaymentFieldAdmin extends Admin{
 	{
 		$object = parent::getNewInstance();
 
-		return $this->setLocales($object);
-	}
-
-	/**
-	 * @param EripPaymentField $object
-	 * @return mixed
-	 */
-	private function setLocales($object){
-		$locales = $this->getConfigurationPool()->getContainer()->getParameter('locales');
-		$empty = array_combine(
-			$locales,
-			array_fill(0, count($locales), '')
-		);
-
-		@$object->setErrorMessages(is_array($object->getErrorMessages()) ? array_merge($empty, $object->getErrorMessages()) : $empty);
+		$this->localize($object);
 
 		return $object;
+	}
+
+	private function localize($object){
+		$this->getConfigurationPool()->getContainer()->get('localizator')->setLocales($object, array(
+			'ErrorMessages',
+			'Text',
+		));
 	}
 
 	/**
@@ -70,7 +65,9 @@ class EripPaymentFieldAdmin extends Admin{
 	{
 		$formMapper
 			->add('name')
-			->add('text')
+			->add('text', 'collection', array(
+				'allow_add' => true,
+			))
 			->add('regex')
 			->add('errorMessages', 'collection', array(
 				'allow_add' => true,

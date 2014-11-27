@@ -16,11 +16,46 @@ class EripCategoryAdmin extends Admin{
 	/**
 	 * {@inheritdoc}
 	 */
+	public function getObject($id)
+	{
+		$object = parent::getObject($id);
+
+		$this->localize($object);
+
+		return $object;
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	public function getNewInstance()
+	{
+		$object = parent::getNewInstance();
+
+		$this->localize($object);
+
+		return $object;
+	}
+
+	private function localize($object){
+		$this->getConfigurationPool()->getContainer()->get('localizator')->setLocales($object, array(
+			'Name',
+		));
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function configureListFields(ListMapper $listMapper)
 	{
 		$listMapper
 			->addIdentifier('id')
-			->add('name', null, array('editable' => true))
+			->add('name', 'array')
+			->add('_action', 'actions', array(
+				'actions' => array(
+					'edit' => array(),
+				)
+			))
 		;
 	}
 
@@ -30,7 +65,9 @@ class EripCategoryAdmin extends Admin{
 	protected function configureFormFields(FormMapper $formMapper)
 	{
 		$formMapper
-			->add('name')
+			->add('name', 'collection', array(
+				'allow_add' => true,
+			))
 		;
 	}
 
