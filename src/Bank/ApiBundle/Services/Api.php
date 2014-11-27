@@ -181,12 +181,10 @@ class Api {
 		$code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
 		$this->logger->info(sprintf(
-			'Notification sent to url "%s" with post %s %s; response: %d %s',
+			'Notification sent to url "%s" with post %s; response: %d',
 			$this->notificationUrl,
-			http_build_query($post),
-			var_export(curl_getinfo($ch), true),
-			$code,
-			curl_error($ch)
+			json_encode($post),
+			$code
 		));
 		curl_close($ch);
 	}

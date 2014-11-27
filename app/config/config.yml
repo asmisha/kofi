@@ -127,7 +127,7 @@ fos_rest:
         view_response_listener: true
 
 monolog:
-    channels: [erip, api]
+    channels: [erip, api, capitalization]
     handlers:
         bank:
             type:     stream
@@ -141,3 +141,7 @@ monolog:
             type:     stream
             path: "%kernel.logs_dir%/api.log"
             channels: ["api"]
+        capitalization:
+            type:     stream
+            path: "%kernel.logs_dir%/capitalization.log"
+            channels: ["capitalization"]
