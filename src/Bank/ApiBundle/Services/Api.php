@@ -123,7 +123,7 @@ class Api {
 	 */
 	public function deposit($account, $amount, $currency, $notify = false, $payerAccount = null){
 		$account = $this->normalizeAccount($account);
-		$payerAccount = $this->normalizeAccount($payerAccount);
+		$payerAccount = $payerAccount ? $this->normalizeAccount($payerAccount) : $payerAccount;
 
 		$account->setBalance($account->getBalance() + $amount * $currency->getRate() / $account->getCurrency()->getRate());
 		$this->em->persist($account);
