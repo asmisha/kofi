@@ -25,6 +25,8 @@ class Api {
 	const INSUFFICIENT_FUNDS_MESSAGE = 'Insufficient funds';
 
 	const NOTIFICATION_TYPE_NEW_DEPOSIT = 'newDeposit';
+	const NOTIFICATION_TYPE_NEW_PAYMENT = 'newPayment';
+	const NOTIFICATION_TYPE_CAPITALIZATION = 'capitalization';
 
 	/** @var EntityManager */
 	private $em;

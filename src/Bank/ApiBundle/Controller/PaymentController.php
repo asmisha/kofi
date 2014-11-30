@@ -90,13 +90,14 @@ class PaymentController extends BaseController
 		$qb = $this->getDoctrine()->getRepository('BankMainBundle:Operation')->createQueryBuilder('o');
 
 		$qb
-			->select('o.type, o.amount, o.paymentInfo, o.processedAt')
+			->select('o.type, o.amount, o.paymentInfo, o.processedAt, ep.id eripPaymentId')
 			->addSelect('ra.id recipientAccountId, rc.firstName recipientFirstName, rc.lastName recipientLastName')
 			->addSelect('ga.id giverAccountId, gc.firstName giverFirstName, gc.lastName giverLastName')
 			->leftJoin('o.recipientAccount', 'ra')
 			->leftJoin('ra.client', 'rc')
 			->leftJoin('o.giverAccount', 'ga')
 			->leftJoin('ga.client', 'gc')
+			->leftJoin('o.eripPayment', 'ep')
 			->where('o.recipientAccount = :account OR o.giverAccount = :account')
 			->setParameter('account', $account)
 		;

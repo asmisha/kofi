@@ -2,10 +2,19 @@ Bank\MainBundle\Entity\Client:
     properties:
         firstName:
             - NotBlank: ~
+            - Length:
+                max: 255
+                maxMessage: "First Name must contain less than 255 characters"
         middleName:
             - NotBlank: ~
+            - Length:
+                max: 255
+                maxMessage: "Middle Name must contain less than 255 characters"
         lastName:
             - NotBlank: ~
+            - Length:
+                max: 255
+                maxMessage: "Last Name must contain less than 255 characters"
         createdAt:
             - Date: ~
         passportSeries:
@@ -23,6 +32,9 @@ Bank\MainBundle\Entity\Client:
                 maxMessage: "client.passportIssueDate.dateRange"
         passportIssueAuthority:
             - NotBlank: ~
+            - Length:
+                max: 255
+                maxMessage: "Passport Issue Authority must contain less than 255 characters"
 
 Bank\MainBundle\Entity\Account:
     properties:
@@ -42,4 +54,9 @@ Bank\MainBundle\Entity\Card:
         number:
             - Regex:
                 pattern: '/^[\d]{16}$/'
-                message: Card Number must consist of exactly 16 digits
+                messa*ge: Card Number must consist of exactly 16 digits
+        cvv:
+            - Length:
+                min: 3
+                max: 3
+                exactMessage: "CVV must contain exactly 3 characters"

@@ -110,6 +110,7 @@ class EripController extends BaseController
 				'fields' => $fields
 			))
 			->setAmount($amount)
+			->setEripPayment($payment)
 		;
 		$em = $this->getDoctrine()->getManager();
 		$em->persist($operation);

@@ -24,4 +24,6 @@ Bank\MainBundle\Entity\Operation:
             targetEntity: Account
         recipientAccount:
             targetEntity: Account
+        eripPayment:
+            targetEntity: EripPayment
     lifecycleCallbacks: {  }
