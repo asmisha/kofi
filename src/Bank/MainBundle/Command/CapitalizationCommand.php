@@ -11,6 +11,7 @@ namespace Bank\MainBundle\Command;
 use Bank\ApiBundle\Services\Api;
 use Bank\MainBundle\Entity\Account;
 use Bank\MainBundle\Entity\Currency;
+use Bank\MainBundle\Entity\Operation;
 use Doctrine\ORM\EntityManager;
 use Monolog\Logger;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
@@ -42,17 +43,30 @@ class CapitalizationCommand extends ContainerAwareCommand{
 
 		foreach($accounts as $a){
 			$was = $a->getBalance();
-			$a->setBalance($a->getBalance() * (1 + $percent / 100));
+			$plus = $a->getBalance() * $percent / 100;
+			$a->setBalance($a->getBalance() + $plus);
 			$em->persist($a);
 
 			$logger->info(sprintf('Capitalization of account %d, %.2f => %.2f', $a->getId(), $was, $a->getBalance()));
-			$api->notifyClient($a->getClient(), 'capitalization', array(
+
+			$info = array(
 				"accountAmountBefore" => $was,
 				"accountAmountAfter" => $a->getBalance(),
 				"capitalizationRate" => $percent / 100,
 				"accountCurrency" => $a->getCurrency()->getCode(),
 				"accountId" => $a->getId()
-			));
+			);
+
+			$o = new Operation();
+			$o
+				->setRecipientAccount($a)
+				->setAmount($plus)
+				->setPaymentInfo($info)
+				->setType('capitalization')
+			;
+			$em->persist($o);
+
+			$api->notifyClient($a->getClient(), Api::NOTIFICATION_TYPE_CAPITALIZATION, $info);
 		}
 
 		$em->flush();

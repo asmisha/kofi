@@ -11,7 +11,7 @@ Bank\MainBundle\Entity\Operation:
     fields:
         type:
             type: string
-            length: 10
+            length: 20
         paymentInfo:
             type: json_array
         amount:
