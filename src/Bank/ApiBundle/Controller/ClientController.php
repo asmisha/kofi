@@ -41,6 +41,7 @@ class ClientController extends BaseController
 					'id' => $account->getId(),
 					'balance' => $account->getBalance(),
 					'currency' => $account->getCurrency()->getId(),
+					'createdAt' => $account->getCreatedAt() ? $account->getCreatedAt()->getTimestamp() : null,
 					'cards' => array(),
 				);
 
