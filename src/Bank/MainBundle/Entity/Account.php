@@ -187,7 +187,7 @@ class Account
     /**
      * @var boolean
      */
-    private $isActive;
+    private $isActive = true;
 
 
     /**
