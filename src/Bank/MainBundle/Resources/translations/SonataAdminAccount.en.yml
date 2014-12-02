@@ -4,18 +4,22 @@ list.label_id: Id
 list.label_client: Client
 list.label_currency: Currency
 list.label_balance: Balance
+list.label_is_active: Active
 list.label_created_at: Created At
 list.label__action: Actions
 
 show.label_client: Client
 show.label_currency: Currency
 show.label_balance: Balance
+show.label_is_active: Active
 show.label_created_at: Created At
 
 filter.label_client: Client
 filter.label_currency: Currency
+filter.label_is_active: Active
 filter.label_created_at: Created At
 
 form.label_id: 'Account #'
 form.label_client: Client
 form.label_currency: Currency
+form.label_is_active: Active

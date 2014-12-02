@@ -12,6 +12,8 @@ Bank\MainBundle\Entity\Account:
             type: datetime
         balance:
             type: float
+        isActive:
+            type: boolean
 
     manyToOne:
         client:

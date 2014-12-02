@@ -17,7 +17,7 @@ class ClientController extends BaseController
 		$qb = $this->getDoctrine()->getRepository('BankMainBundle:Client')->createQueryBuilder('c');
 		$qb
 			->select('c, account, card')
-			->leftJoin('c.accounts', 'account')
+			->leftJoin('c.accounts', 'account', 'WITH', 'account.isActive = true')
 			->leftJoin('account.cards', 'card')
 			->where('c.id = :id')
 			->setParameter('id', $id)

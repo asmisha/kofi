@@ -194,4 +194,32 @@ class Operation
     {
         return $this->type;
     }
+    /**
+     * @var \Bank\MainBundle\Entity\EripPayment
+     */
+    private $eripPayment;
+
+
+    /**
+     * Set eripPayment
+     *
+     * @param \Bank\MainBundle\Entity\EripPayment $eripPayment
+     * @return Operation
+     */
+    public function setEripPayment(\Bank\MainBundle\Entity\EripPayment $eripPayment = null)
+    {
+        $this->eripPayment = $eripPayment;
+
+        return $this;
+    }
+
+    /**
+     * Get eripPayment
+     *
+     * @return \Bank\MainBundle\Entity\EripPayment 
+     */
+    public function getEripPayment()
+    {
+        return $this->eripPayment;
+    }
 }

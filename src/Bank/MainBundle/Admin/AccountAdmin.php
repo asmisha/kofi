@@ -32,6 +32,7 @@ class AccountAdmin extends Admin{
 			->add('client')
 			->add('currency')
 			->add('balance')
+			->add('isActive', null, array('editable' => true))
 			->add('createdAt')
 			// You may also specify the actions you want to be displayed in the list
 			->add('_action', 'actions', array(
@@ -53,6 +54,7 @@ class AccountAdmin extends Admin{
 			->add('client')
 			->add('currency')
 			->add('balance')
+			->add('isActive')
 			->add('createdAt')
 			->add('cards')
 		;
@@ -71,6 +73,7 @@ class AccountAdmin extends Admin{
 			))
 			->add('client'/*, null, array('required' => true)*/)
 			->add('currency')
+			->add('isActive')
 			->add('cards', 'sonata_type_collection', array(), array(
 				'edit' => 'inline',
 				'inline' => 'table',
@@ -87,6 +90,7 @@ class AccountAdmin extends Admin{
 		$filterMapper
 			->add('client')
 			->add('currency')
+			->add('isActive')
 			->add('createdAt')
 		;
 	}
