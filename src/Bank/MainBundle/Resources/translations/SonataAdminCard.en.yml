@@ -2,17 +2,21 @@ breadcrumb.link_card_list: Cards
 
 form.label_id: Id
 form.label_number: Card Number
+form.label_cvv: CVV
 form.label_expires_at: Expiration Date
 
 list.label_id: Id
 list.label_number: Card Number
+list.label_cvv: CVV
 list.label_expires_at: Expiration Date
 list.label__action: Action
 
 show.label_id: Id
 show.label_number: Card Number
+show.label_cvv: CVV
 show.label_expires_at: Expiration Date
 
 filter.label_id: Id
 filter.label_number: Card Number
+filter.label_cvv: CVV
 filter.label_expires_at: Expiration Date
