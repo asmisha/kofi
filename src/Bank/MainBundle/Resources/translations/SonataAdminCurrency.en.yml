@@ -14,3 +14,9 @@ form.label_rate: Rate
 
 filter.label_name: Name
 filter.label_code: Code
+
+show.label_id: Id
+show.label_name: Name
+show.label_name_localized: Localized Name
+show.label_code: Code
+show.label_rate: Rate
