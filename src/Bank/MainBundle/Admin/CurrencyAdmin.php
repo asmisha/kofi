@@ -74,7 +74,7 @@ class CurrencyAdmin extends Admin{
 		$showMapper
 			->add('id')
 			->add('name')
-			->add('nameLocalized')
+			->add('nameLocalized', 'array')
 			->add('code')
 			->add('rate')
 		;

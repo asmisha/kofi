@@ -72,7 +72,7 @@ services:
     sonata.admin.eripPaymentField:
         class: Bank\MainBundle\Admin\EripPaymentFieldAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "%dev_group%", label: "Erip Payment Field", label_translator_strategy: "sonata.admin.label.strategy.underscore" }
+            - { name: sonata.admin, manager_type: orm, group: "%dev_group%", label: "Erip Payment Field", label_translator_strategy: "sonata.admin.label.strategy.underscore", show_in_dashboard: false }
         arguments:
             - ~
             - Bank\MainBundle\Entity\EripPaymentField
