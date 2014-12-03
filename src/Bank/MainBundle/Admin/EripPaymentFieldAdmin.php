@@ -66,11 +66,11 @@ class EripPaymentFieldAdmin extends Admin{
 		$formMapper
 			->add('name')
 			->add('text', 'collection', array(
-				'allow_add' => true,
+//				'allow_add' => true,
 			))
 			->add('regex')
 			->add('errorMessages', 'collection', array(
-				'allow_add' => true,
+//				'allow_add' => true,
 			))
 		;
 	}

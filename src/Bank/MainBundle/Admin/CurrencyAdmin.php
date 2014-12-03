@@ -18,18 +18,32 @@ class CurrencyAdmin extends Admin{
 	 */
 	public function getObject($id)
 	{
-		/** @var Currency $object */
 		$object = parent::getObject($id);
 
-		$locales = $this->getConfigurationPool()->getContainer()->getParameter('locales');
-		$empty = array_combine(
-			$locales,
-			array_fill(0, count($locales), '')
-		);
-
-		@$object->setNameLocalized(is_array($object->getNameLocalized()) ? array_merge($empty, $object->getNameLocalized()) : $empty);
+		$this->localize($object);
 
 		return $object;
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	public function getNewInstance()
+	{
+		$object = parent::getNewInstance();
+
+		$this->localize($object);
+
+		return $object;
+	}
+
+	/**
+	 * @param Currency $object
+	 */
+	private function localize($object){
+		$this->getConfigurationPool()->getContainer()->get('localizator')->setLocales($object, array(
+			'NameLocalized',
+		));
 	}
 
 
@@ -69,7 +83,9 @@ class CurrencyAdmin extends Admin{
 	{
 		$formMapper
 			->add('name')
-			->add('nameLocalized', 'collection')
+			->add('nameLocalized', 'collection', array(
+//				'allow_add' => true,
+			))
 			->add('code')
 			->add('rate')
 		;

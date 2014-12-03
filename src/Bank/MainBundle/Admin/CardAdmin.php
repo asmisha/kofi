@@ -47,7 +47,9 @@ class CardAdmin extends Admin{
 	protected function configureFormFields(FormMapper $formMapper)
 	{
 		$formMapper
+//			->add('account')
 			->add('number')
+			->add('cvv')
 			->add('expiresAt')
 		;
 	}

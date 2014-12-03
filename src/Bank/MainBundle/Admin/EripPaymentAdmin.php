@@ -79,7 +79,7 @@ class EripPaymentAdmin extends Admin{
 	{
 		$formMapper
 			->add('name', 'collection', array(
-				'allow_add' => true,
+//				'allow_add' => true,
 			))
 			->add('category')
 			->add('fields', 'sonata_type_collection', array(
