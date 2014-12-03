@@ -54,7 +54,7 @@ Bank\MainBundle\Entity\Card:
         number:
             - Regex:
                 pattern: '/^[\d]{16}$/'
-                messa*ge: Card Number must consist of exactly 16 digits
+                message: Card Number must consist of exactly 16 digits
         cvv:
             - Length:
                 min: 3

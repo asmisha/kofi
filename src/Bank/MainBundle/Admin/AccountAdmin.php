@@ -73,7 +73,7 @@ class AccountAdmin extends Admin{
 			))
 			->add('client'/*, null, array('required' => true)*/)
 			->add('currency')
-			->add('isActive')
+			->add('isActive', null, array('required' => false))
 			->add('cards', 'sonata_type_collection', array(), array(
 				'edit' => 'inline',
 				'inline' => 'table',
