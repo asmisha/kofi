@@ -86,7 +86,10 @@ class AccountAdmin extends Admin{
 				'disabled' => true,
 				'required' => false,
 			))
-//			->add('client'/*, null, array('required' => true)*/)
+			->add('client', null, array(
+				'read_only' => $isNested,
+				'disabled'  => $isNested,
+			))
 			->add('currency', null, array(
 				'read_only' => $isEdit,
 				'disabled'  => $isEdit,
