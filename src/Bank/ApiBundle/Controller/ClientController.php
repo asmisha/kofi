@@ -18,7 +18,7 @@ class ClientController extends BaseController
 		$qb
 			->select('c, account, card')
 			->leftJoin('c.accounts', 'account', 'WITH', 'account.isActive = true')
-			->leftJoin('account.cards', 'card')
+			->leftJoin('account.cards', 'card', 'WITH', 'card.isActive = true')
 			->where('c.id = :id AND c.isActive = true')
 			->setParameter('id', $id)
 		;
