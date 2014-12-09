@@ -14,7 +14,12 @@ use Sonata\AdminBundle\Show\ShowMapper;
 class ClientAdmin extends Admin{
 	protected function configureRoutes(RouteCollection $collection)
 	{
-		$collection->add('addAccount', $this->getRouterIdParameter().'/addAccount');
+		$collection
+			->add('addAccount', $this->getRouterIdParameter().'/addAccount')
+			->remove('delete')
+			->remove('acl')
+			->remove('export')
+		;
 	}
 	public function getFormTheme(){
 		return array_merge(parent::getFormTheme(), array(
@@ -37,6 +42,7 @@ class ClientAdmin extends Admin{
 			->add('passportIssueDate')
 			->add('passportIssueAuthority')
 			->add('createdAt')
+			->add('isActive', null, array('editable' => true))
 			// You may also specify the actions you want to be displayed in the list
 			->add('_action', 'actions', array(
 				'actions' => array(
@@ -64,6 +70,7 @@ class ClientAdmin extends Admin{
 			->add('passportNumber')
 			->add('passportIssueDate')
 			->add('passportIssueAuthority')
+			->add('isActive')
 			->add('createdAt')
 		;
 	}
@@ -73,21 +80,47 @@ class ClientAdmin extends Admin{
 	 */
 	protected function configureFormFields(FormMapper $formMapper)
 	{
+		$isEdit = boolval($this->getSubject() && $this->getSubject()->getId());
+
 		$formMapper
-			->add('firstName')
-			->add('middleName')
-			->add('lastName')
-			->add('passportSeries', null, array(
-				'error_bubbling' => false
+			->add('firstName', null, array(
+				'read_only' => $isEdit,
+				'disabled'  => $isEdit,
 			))
-			->add('passportNumber')
-			->add('passportIssueDate', 'date', array('widget' => 'single_text'))
-			->add('passportIssueAuthority')
-			->add('accounts', 'sonata_type_collection', array(), array(
+			->add('middleName', null, array(
+				'read_only' => $isEdit,
+				'disabled'  => $isEdit,
+			))
+			->add('lastName', null, array(
+				'read_only' => $isEdit,
+				'disabled'  => $isEdit,
+			))
+			->add('passportSeries', null, array(
+				'error_bubbling' => false,
+				'read_only' => $isEdit,
+				'disabled'  => $isEdit,
+			))
+			->add('passportNumber', null, array(
+				'read_only' => $isEdit,
+				'disabled'  => $isEdit,
+			))
+			->add('passportIssueDate', 'date', array(
+				'widget' => 'single_text',
+				'read_only' => $isEdit,
+				'disabled'  => $isEdit,
+			))
+			->add('passportIssueAuthority', null, array(
+				'read_only' => $isEdit,
+				'disabled'  => $isEdit,
+			))
+			->add('accounts', 'sonata_type_collection', array(
+				'by_reference' => false,
+			), array(
 				'edit' => 'inline',
 				'inline' => 'table',
 				'sortable' => 'position',
 			))
+			->add('isActive', null, array('required' => false))
 			->add('plainPassword', new GeneratedPasswordType())
 		;
 	}

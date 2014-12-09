@@ -7,6 +7,7 @@ use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
 
 class AccountAdmin extends Admin{
@@ -22,6 +23,15 @@ class AccountAdmin extends Admin{
 		return $instance;
 	}
 
+	protected function configureRoutes(RouteCollection $collection)
+	{
+		$collection
+			->remove('delete')
+			->remove('acl')
+			->remove('export')
+		;
+	}
+
 	/**
 	 * {@inheritdoc}
 	 */
@@ -29,7 +39,7 @@ class AccountAdmin extends Admin{
 	{
 		$listMapper
 			->addIdentifier('id', null, array('route' => array('name' => 'show')))
-			->add('client')
+//			->add('client')
 			->add('currency')
 			->add('balance')
 			->add('isActive', null, array('editable' => true))
@@ -65,16 +75,31 @@ class AccountAdmin extends Admin{
 	 */
 	protected function configureFormFields(FormMapper $formMapper)
 	{
+		$isEdit = boolval($this->getSubject() && $this->getSubject()->getId());
+		$isNested = $this->getParentFieldDescription() !== null;
+//		var_dump(get_class($this->getParentFieldDescription()));
+//		var_dump(get_class($this->getParentFieldDescription()));exit;
+
 		$formMapper
 			->add('id', null, array(
 				'read_only' => true,
 				'disabled' => true,
 				'required' => false,
 			))
-			->add('client'/*, null, array('required' => true)*/)
-			->add('currency')
+//			->add('client'/*, null, array('required' => true)*/)
+			->add('currency', null, array(
+				'read_only' => $isEdit,
+				'disabled'  => $isEdit,
+			))
+			->add('balance', null, array(
+				'read_only' => $isEdit,
+				'disabled'  => $isEdit,
+			))
 			->add('isActive', null, array('required' => false))
-			->add('cards', 'sonata_type_collection', array(), array(
+			->add('cards', 'sonata_type_collection', array(
+				'by_reference' => false,
+				'btn_add' => $isNested ? false : 'link_add',
+			), array(
 				'edit' => 'inline',
 				'inline' => 'table',
 				'sortable' => 'position',

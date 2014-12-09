@@ -9,6 +9,7 @@ form.label_passport_issue_date: Passport Issue Date
 form.label_passport_issue_authority: Passport Issue Authority
 form.label_accounts: Accounts
 form.label_plain_password: Password
+form.label_is_active: Is Active
 
 list.label_id: ID
 list.label_first_name: First Name
@@ -19,6 +20,7 @@ list.label_passport_number: Passport Number
 list.label_passport_issue_date: Passport Issue Date
 list.label_passport_issue_authority: Passport Issue Authority
 list.label_created_at: Created At
+list.label_is_active: Is Active
 list.label__action: Actions
 
 filter.label_id: ID
@@ -30,6 +32,7 @@ filter.label_passport_number: Passport Number
 filter.label_passport_issue_date: Passport Issue Date
 filter.label_passport_issue_authority: Passport Issue Authority
 filter.label_created_at: Created At
+filter.label_is_active: Is Active
 filter.label__action: Actions
 
 show.label_first_name: First Name
@@ -39,3 +42,5 @@ show.label_passport_series: Passport Series
 show.label_passport_number: Passport Number
 show.label_passport_issue_date: Passport Issue Date
 show.label_passport_issue_authority: Passport Issue Authority
+show.label_created_at: Created At
+show.label_is_active: Is Active

@@ -10,6 +10,16 @@ use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
 
 class CardAdmin extends Admin{
+	protected function configureRoutes(RouteCollection $collection)
+	{
+		$collection
+			->remove('delete')
+			->remove('acl')
+			->remove('export')
+			->remove('edit')
+		;
+	}
+
 	/**
 	 * {@inheritdoc}
 	 */
@@ -18,6 +28,7 @@ class CardAdmin extends Admin{
 		$listMapper
 			->addIdentifier('id', null, array('route' => array('name' => 'show')))
 			->add('number')
+			->add('isActive', null, array('editable' => true))
 			->add('expiresAt', 'date', array('widget' => 'single_text'))
 			// You may also specify the actions you want to be displayed in the list
 			->add('_action', 'actions', array(
@@ -37,6 +48,8 @@ class CardAdmin extends Admin{
 	{
 		$showMapper
 			->add('number')
+			->add('cvv')
+			->add('isActive')
 			->add('expiresAt')
 		;
 	}
@@ -50,7 +63,8 @@ class CardAdmin extends Admin{
 //			->add('account')
 			->add('number')
 			->add('cvv')
-			->add('expiresAt')
+			->add('expiresAt', 'date')
+			->add('isActive', null, array('required' => false))
 		;
 	}
 

@@ -16,6 +16,8 @@ Bank\MainBundle\Entity\Card:
             length: '3'
         expiresAt:
             type: date
+        isActive:
+            type: boolean
 
     manyToOne:
         account:

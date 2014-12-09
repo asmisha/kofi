@@ -23,19 +23,19 @@ class Init implements FixtureInterface
 	 */
 	public function load(ObjectManager $om)
 	{
-//		$userAdmin = new User();
-//		$userAdmin
-//			->setUsername('admin')
-//			->setUsernameCanonical('admin')
-//			->setEmail('asmisha@tut.by')
-//			->setEmailCanonical('asmisha@tut.by')
-//			->setPlainPassword('admin')
-//			->setEnabled(true)
-//			->addRole('ROLE_SUPER_ADMIN')
-//			->setSuperAdmin(true)
-//		;
-//
-//		$om->persist($userAdmin);
+		$userAdmin = new User();
+		$userAdmin
+			->setUsername('admin')
+			->setUsernameCanonical('admin')
+			->setEmail('asmisha@tut.by')
+			->setEmailCanonical('asmisha@tut.by')
+			->setPlainPassword('admin')
+			->setEnabled(true)
+			->addRole('ROLE_SUPER_ADMIN')
+			->setSuperAdmin(true)
+		;
+
+		$om->persist($userAdmin);
 
 		$currency = new Currency();
 		$currency

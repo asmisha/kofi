@@ -50,6 +50,8 @@ Bank\MainBundle\Entity\Client:
         tokenExpirationDate:
             type: datetime
             nullable: true
+        isActive:
+            type: boolean
 
     oneToMany:
         accounts:

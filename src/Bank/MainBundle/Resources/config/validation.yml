@@ -1,4 +1,8 @@
 Bank\MainBundle\Entity\Client:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+            - passportSeries
+            - passportNumber
     properties:
         firstName:
             - NotBlank: ~
@@ -50,13 +54,19 @@ Bank\MainBundle\Entity\Account:
             - NotNull: ~
 
 Bank\MainBundle\Entity\Card:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: number
     properties:
         number:
             - Regex:
                 pattern: '/^[\d]{16}$/'
-                message: Card Number must consist of exactly 16 digits
+                message: 'Card Number must consist of exactly 16 digits'
         cvv:
-            - Length:
-                min: 3
-                max: 3
-                exactMessage: "CVV must contain exactly 3 characters"
+            - Regex:
+                pattern: '/^[\d]{3}$/'
+                message: 'CVV must contain exactly 3 digits'
+        expiresAt:
+            - Date: ~
+            - Bank\MainBundle\Validator\Constraints\DateRange:
+                min: 'today'
+                max: 'today + 5 years'

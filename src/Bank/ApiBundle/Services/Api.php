@@ -62,7 +62,7 @@ class Api {
 			'id' => $clientId
 		));
 
-		if(!$client || !is_numeric($clientId)){
+		if(!$client || !is_numeric($clientId) || !$client->getIsActive()){
 			throw new \Exception(self::AUTH_FAILED_MESSAGE, self::AUTH_FAILED_CODE);
 		}
 

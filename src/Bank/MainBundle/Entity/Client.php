@@ -442,4 +442,32 @@ class Client
     {
         return $this->tokenExpirationDate;
     }
+    /**
+     * @var boolean
+     */
+    private $isActive = true;
+
+
+    /**
+     * Set isActive
+     *
+     * @param boolean $isActive
+     * @return Client
+     */
+    public function setIsActive($isActive)
+    {
+        $this->isActive = $isActive;
+
+        return $this;
+    }
+
+    /**
+     * Get isActive
+     *
+     * @return boolean 
+     */
+    public function getIsActive()
+    {
+        return $this->isActive;
+    }
 }

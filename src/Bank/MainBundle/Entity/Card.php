@@ -140,4 +140,32 @@ class Card
 	public function __toString(){
 		return substr_replace($this->getNumber(), str_repeat('*', 8), 4, 8);
 	}
+    /**
+     * @var boolean
+     */
+    private $isActive = true;
+
+
+    /**
+     * Set isActive
+     *
+     * @param boolean $isActive
+     * @return Card
+     */
+    public function setIsActive($isActive)
+    {
+        $this->isActive = $isActive;
+
+        return $this;
+    }
+
+    /**
+     * Get isActive
+     *
+     * @return boolean 
+     */
+    public function getIsActive()
+    {
+        return $this->isActive;
+    }
 }

@@ -27,3 +27,4 @@ form.label_client: Client
 form.label_currency: Currency
 form.label_is_active: Active
 form.label_cards: Cards
+form.label_balance: Balance
