@@ -100,7 +100,7 @@ class AccountAdmin extends Admin{
 			))
 			->add('isActive', null, array('required' => false))
 			->add('cards', 'sonata_type_collection', array(
-				'by_reference' => false,
+//				'by_reference' => false,
 				'btn_add' => $isNested ? false : 'link_add',
 			), array(
 				'edit' => 'inline',
