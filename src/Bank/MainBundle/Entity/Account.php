@@ -163,6 +163,7 @@ class Account
     public function addCard(\Bank\MainBundle\Entity\Card $cards)
     {
         $this->cards[] = $cards;
+		$cards->setAccount($this);
 
         return $this;
     }
@@ -175,6 +176,7 @@ class Account
     public function removeCard(\Bank\MainBundle\Entity\Card $cards)
     {
         $this->cards->removeElement($cards);
+		$cards->setAccount(null);
     }
 
     /**

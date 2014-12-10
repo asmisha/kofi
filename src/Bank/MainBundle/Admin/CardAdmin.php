@@ -59,11 +59,22 @@ class CardAdmin extends Admin{
 	 */
 	protected function configureFormFields(FormMapper $formMapper)
 	{
+		$isEdit = boolval($this->getSubject() && $this->getSubject()->getId());
+
 		$formMapper
 //			->add('account')
-			->add('number')
-			->add('cvv')
-			->add('expiresAt', 'date')
+			->add('number', null, array(
+				'read_only' => $isEdit,
+				'disabled'  => $isEdit,
+			))
+			->add('cvv', null, array(
+				'read_only' => $isEdit,
+				'disabled'  => $isEdit,
+			))
+			->add('expiresAt', 'date', array(
+				'read_only' => $isEdit,
+				'disabled'  => $isEdit,
+			))
 			->add('isActive', null, array('required' => false))
 		;
 	}

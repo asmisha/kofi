@@ -243,6 +243,7 @@ class Client
     public function addAccount(\Bank\MainBundle\Entity\Account $accounts)
     {
         $this->accounts[] = $accounts;
+		$accounts->setClient($this);
 
         return $this;
     }
@@ -254,6 +255,7 @@ class Client
      */
     public function removeAccount(\Bank\MainBundle\Entity\Account $accounts)
     {
+		$accounts->setClient(null);
         $this->accounts->removeElement($accounts);
     }
 

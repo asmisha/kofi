@@ -12,6 +12,10 @@ use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
 
 class ClientAdmin extends Admin{
+	protected $formOptions = array(
+		'cascade_validation' => true
+	);
+
 	protected function configureRoutes(RouteCollection $collection)
 	{
 		$collection
@@ -115,6 +119,10 @@ class ClientAdmin extends Admin{
 			))
 			->add('accounts', 'sonata_type_collection', array(
 				'by_reference' => false,
+				'type_options' => array(
+					// Prevents the "Delete" option from being displayed
+					'delete' => false,
+				),
 			), array(
 				'edit' => 'inline',
 				'inline' => 'table',

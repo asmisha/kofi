@@ -11,6 +11,10 @@ use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
 
 class AccountAdmin extends Admin{
+	protected $formOptions = array(
+		'cascade_validation' => true
+	);
+
 	public function getNewInstance(){
 		/** @var Account $instance */
 		$instance = parent::getNewInstance();
@@ -86,10 +90,18 @@ class AccountAdmin extends Admin{
 				'disabled' => true,
 				'required' => false,
 			))
-			->add('client', null, array(
-				'read_only' => $isNested,
-				'disabled'  => $isNested,
-			))
+		;
+
+		if(!$isNested){
+			$formMapper
+				->add('client', null, array(
+					'read_only' => $isEdit,
+					'disabled'  => $isEdit,
+				))
+			;
+		}
+
+		$formMapper
 			->add('currency', null, array(
 				'read_only' => $isEdit,
 				'disabled'  => $isEdit,
@@ -100,8 +112,12 @@ class AccountAdmin extends Admin{
 			))
 			->add('isActive', null, array('required' => false))
 			->add('cards', 'sonata_type_collection', array(
-//				'by_reference' => false,
+				'by_reference' => false,
 				'btn_add' => $isNested ? false : 'link_add',
+				'type_options' => array(
+					// Prevents the "Delete" option from being displayed
+					'delete' => false,
+				),
 			), array(
 				'edit' => 'inline',
 				'inline' => 'table',
