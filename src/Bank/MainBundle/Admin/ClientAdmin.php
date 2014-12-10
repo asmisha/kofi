@@ -84,7 +84,7 @@ class ClientAdmin extends Admin{
 	 */
 	protected function configureFormFields(FormMapper $formMapper)
 	{
-		$isEdit = boolval($this->getSubject() && $this->getSubject()->getId());
+		$isEdit = ($this->getSubject() && $this->getSubject()->getId());
 
 		$formMapper
 			->add('firstName', null, array(

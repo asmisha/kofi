@@ -79,7 +79,7 @@ class AccountAdmin extends Admin{
 	 */
 	protected function configureFormFields(FormMapper $formMapper)
 	{
-		$isEdit = boolval($this->getSubject() && $this->getSubject()->getId());
+		$isEdit = ($this->getSubject() && $this->getSubject()->getId());
 		$isNested = $this->getParentFieldDescription() !== null;
 //		var_dump(get_class($this->getParentFieldDescription()));
 //		var_dump(get_class($this->getParentFieldDescription()));exit;

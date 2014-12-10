@@ -59,7 +59,7 @@ class CardAdmin extends Admin{
 	 */
 	protected function configureFormFields(FormMapper $formMapper)
 	{
-		$isEdit = boolval($this->getSubject() && $this->getSubject()->getId());
+		$isEdit = ($this->getSubject() && $this->getSubject()->getId());
 
 		$formMapper
 			->add('account', null, array(
