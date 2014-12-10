@@ -103,8 +103,8 @@ class AccountAdmin extends Admin{
 
 		$formMapper
 			->add('currency', null, array(
-				'read_only' => $isEdit,
-				'disabled'  => $isEdit,
+				'read_only' => (!$this->getSubject() || !$this->getSubject()->getCurrency()),
+				'disabled'  => (!$this->getSubject() || !$this->getSubject()->getCurrency()),
 			))
 			->add('balance', null, array(
 				'read_only' => $isEdit,
