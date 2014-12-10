@@ -53,9 +53,9 @@ class ClientAdmin extends Admin{
 					'show' => array(),
 					'edit' => array(),
 					'delete' => array(),
-					'add account' => array(
-						'template' => 'BankMainBundle:CRUD:list__action_addAccount.html.twig'
-					)
+//					'add account' => array(
+//						'template' => 'BankMainBundle:CRUD:list__action_addAccount.html.twig'
+//					)
 				)
 			))
 		;
@@ -123,6 +123,7 @@ class ClientAdmin extends Admin{
 					// Prevents the "Delete" option from being displayed
 					'delete' => false,
 				),
+				'btn_add' => false,
 			), array(
 				'edit' => 'inline',
 				'inline' => 'table',

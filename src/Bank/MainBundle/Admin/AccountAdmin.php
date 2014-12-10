@@ -113,11 +113,11 @@ class AccountAdmin extends Admin{
 			->add('isActive', null, array('required' => false))
 			->add('cards', 'sonata_type_collection', array(
 				'by_reference' => false,
-				'btn_add' => $isNested ? false : 'link_add',
 				'type_options' => array(
 					// Prevents the "Delete" option from being displayed
 					'delete' => false,
 				),
+				'btn_add' => false,
 			), array(
 				'edit' => 'inline',
 				'inline' => 'table',

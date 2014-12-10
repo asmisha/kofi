@@ -62,7 +62,10 @@ class CardAdmin extends Admin{
 		$isEdit = boolval($this->getSubject() && $this->getSubject()->getId());
 
 		$formMapper
-//			->add('account')
+			->add('account', null, array(
+				'read_only' => $isEdit,
+				'disabled'  => $isEdit,
+			))
 			->add('number', null, array(
 				'read_only' => $isEdit,
 				'disabled'  => $isEdit,

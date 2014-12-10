@@ -34,8 +34,20 @@ class Init implements FixtureInterface
 			->addRole('ROLE_SUPER_ADMIN')
 			->setSuperAdmin(true)
 		;
-
 		$om->persist($userAdmin);
+
+		$user = new User();
+		$user
+			->setUsername('user')
+			->setUsernameCanonical('user')
+			->setEmail('user@example.com')
+			->setEmailCanonical('user@example.com')
+			->setPlainPassword('user')
+			->setEnabled(true)
+			->addRole('ROLE_SONATA_ADMIN')
+		;
+
+		$om->persist($user);
 
 		$currency = new Currency();
 		$currency
