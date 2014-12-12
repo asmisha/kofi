@@ -298,7 +298,7 @@ class Client
     }
 
 	public function __toString(){
-		return $this->firstName.' '.$this->lastName;
+		return sprintf('Client #%d, %s %s', $this->id, $this->firstName, $this->lastName);
 	}
     /**
      * @var string
