@@ -111,18 +111,18 @@ class AccountAdmin extends Admin{
 				'disabled'  => $isEdit,
 			))
 			->add('isActive', null, array('required' => false))
-			->add('cards', 'sonata_type_collection', array(
-				'by_reference' => false,
-				'type_options' => array(
-					// Prevents the "Delete" option from being displayed
-					'delete' => false,
-				),
-				'btn_add' => false,
-			), array(
-				'edit' => 'inline',
-				'inline' => 'table',
-				'sortable' => 'position',
-			))
+//			->add('cards', 'sonata_type_collection', array(
+//				'by_reference' => false,
+//				'type_options' => array(
+//					// Prevents the "Delete" option from being displayed
+//					'delete' => false,
+//				),
+//				'btn_add' => false,
+//			), array(
+//				'edit' => 'inline',
+//				'inline' => 'table',
+//				'sortable' => 'position',
+//			))
 		;
 	}
 
