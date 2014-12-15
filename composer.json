@@ -19,10 +19,10 @@
         "sensio/framework-extra-bundle": "~3.0",
         "incenteev/composer-parameter-handler": "~2.0",
         "sonata-project/admin-bundle": "2.3.*",
-        "sonata-project/doctrine-orm-admin-bundle": "dev-master",
-        "sonata-project/easy-extends-bundle": "dev-master",
+        "sonata-project/doctrine-orm-admin-bundle": "~2",
+        "sonata-project/easy-extends-bundle": "~2",
         "sonata-project/datagrid-bundle": "~2.2@dev",
-        "sonata-project/user-bundle": "dev-master",
+        "sonata-project/user-bundle": "~2.2",
         "doctrine/doctrine-fixtures-bundle": "2.2.*",
         "friendsofsymfony/rest-bundle": "1.*",
         "jms/serializer-bundle": "*"

@@ -13,6 +13,21 @@ use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
 
 class CurrencyAdmin extends Admin{
+	protected function configureRoutes(RouteCollection $collection)
+	{
+		$collection
+			->remove('acl')
+			->remove('export')
+		;
+
+		if(!$this->isGranted('ADMIN')){
+			$collection
+				->remove('delete')
+				->remove('batch')
+			;
+		}
+	}
+
 	/**
 	 * {@inheritdoc}
 	 */
@@ -85,12 +100,21 @@ class CurrencyAdmin extends Admin{
 	 */
 	protected function configureFormFields(FormMapper $formMapper)
 	{
+		$canEdit = $this->isGranted('ADMIN');
+
 		$formMapper
-			->add('name')
-			->add('nameLocalized', 'collection', array(
-//				'allow_add' => true,
+			->add('name', null, array(
+				'read_only' => !$canEdit,
+				'disabled'  => !$canEdit,
 			))
-			->add('code')
+			->add('nameLocalized', 'collection', array(
+				'read_only' => !$canEdit,
+				'disabled'  => !$canEdit,
+			))
+			->add('code', null, array(
+				'read_only' => !$canEdit,
+				'disabled'  => !$canEdit,
+			))
 			->add('rate')
 		;
 	}
