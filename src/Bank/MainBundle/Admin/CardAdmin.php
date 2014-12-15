@@ -47,6 +47,7 @@ class CardAdmin extends Admin{
 	protected function configureShowFields(ShowMapper $showMapper)
 	{
 		$showMapper
+			->add('account')
 			->add('number')
 			->add('cvv')
 			->add('isActive')
@@ -88,6 +89,7 @@ class CardAdmin extends Admin{
 	protected function configureDatagridFilters(DatagridMapper $filterMapper)
 	{
 		$filterMapper
+			->add('account')
 			->add('number')
 			->add('expiresAt')
 		;
