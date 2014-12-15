@@ -117,18 +117,18 @@ class ClientAdmin extends Admin{
 				'read_only' => $isEdit,
 				'disabled'  => $isEdit,
 			))
-			->add('accounts', 'sonata_type_collection', array(
-				'by_reference' => false,
-				'type_options' => array(
-					// Prevents the "Delete" option from being displayed
-					'delete' => false,
-				),
-				'btn_add' => false,
-			), array(
-				'edit' => 'inline',
-				'inline' => 'table',
-				'sortable' => 'position',
-			))
+//			->add('accounts', 'sonata_type_collection', array(
+//				'by_reference' => false,
+//				'type_options' => array(
+//					// Prevents the "Delete" option from being displayed
+//					'delete' => false,
+//				),
+//				'btn_add' => false,
+//			), array(
+//				'edit' => 'inline',
+//				'inline' => 'table',
+//				'sortable' => 'position',
+//			))
 			->add('isActive', null, array('required' => false))
 			->add('plainPassword', new GeneratedPasswordType())
 		;
