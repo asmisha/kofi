@@ -70,3 +70,5 @@ Bank\MainBundle\Entity\Card:
             - Bank\MainBundle\Validator\Constraints\DateRange:
                 min: 'today'
                 max: 'today + 5 years'
+        account:
+            - NotNull: ~
